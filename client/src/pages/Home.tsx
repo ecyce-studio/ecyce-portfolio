@@ -116,7 +116,7 @@ export default function Home() {
                 color: "#22c55e",
                 textTransform: "uppercase",
                 marginBottom: "0.5rem",
-              }}>Selected Work</p>
+              }}>Work</p>
               <h2 style={{
                 fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "clamp(1.4rem, 3vw, 2rem)",
@@ -213,8 +213,8 @@ export default function Home() {
                 transition: "background 150ms",
                 cursor: "pointer",
               }}
-              onMouseEnter={e => (e.currentTarget.style.background = "#16a34a")}
-              onMouseLeave={e => (e.currentTarget.style.background = "#22c55e")}
+                onMouseEnter={e => (e.currentTarget.style.background = "#16a34a")}
+                onMouseLeave={e => (e.currentTarget.style.background = "#22c55e")}
               >
                 Learn More <ArrowRight size={13} />
               </span>

@@ -21,35 +21,35 @@ const D3 = "#222222";  // dark surface 3
 const MG = "#166534";  // mid green
 
 const tileData: Tile[] = [
-  { type: "half-circle",    bg: D1,  fg: G,   rotate: 0   },
-  { type: "diagonal",       bg: BK,  fg: D2,  rotate: 0   },
-  { type: "triangle",       bg: G,   fg: BK,  rotate: 0   },
-  { type: "quarter-circle", bg: D2,  fg: G,   rotate: 0   },
+  { type: "half-circle", bg: D1, fg: G, rotate: 0 },
+  { type: "diagonal", bg: BK, fg: D2, rotate: 0 },
+  { type: "triangle", bg: G, fg: BK, rotate: 0 },
+  { type: "quarter-circle", bg: D2, fg: G, rotate: 0 },
 
-  { type: "chevron",        bg: DG,  fg: G,   rotate: 0   },
-  { type: "stripes",        bg: BK,  fg: D3,  rotate: 0   },
-  { type: "dots",           bg: D1,  fg: G,   rotate: 0   },
-  { type: "arc",            bg: G,   fg: BK,  rotate: 0   },
+  { type: "chevron", bg: DG, fg: G, rotate: 0 },
+  { type: "stripes", bg: BK, fg: D3, rotate: 0 },
+  { type: "dots", bg: D1, fg: G, rotate: 0 },
+  { type: "arc", bg: G, fg: BK, rotate: 0 },
 
-  { type: "square-outline", bg: D2,  fg: G,   rotate: 0   },
-  { type: "wave",           bg: BK,  fg: G,   rotate: 0   },
-  { type: "triangle",       bg: D1,  fg: D3,  rotate: 180 },
-  { type: "half-circle",    bg: MG,  fg: BK,  rotate: 180 },
+  { type: "square-outline", bg: D2, fg: G, rotate: 0 },
+  { type: "wave", bg: BK, fg: G, rotate: 0 },
+  { type: "triangle", bg: D1, fg: D3, rotate: 180 },
+  { type: "half-circle", bg: MG, fg: BK, rotate: 180 },
 
-  { type: "cross",          bg: D3,  fg: G,   rotate: 0   },
-  { type: "diagonal",       bg: DG,  fg: G,   rotate: 0   },
-  { type: "circle",         bg: BK,  fg: D2,  rotate: 0   },
-  { type: "chevron",        bg: D1,  fg: G,   rotate: 90  },
+  { type: "cross", bg: D3, fg: G, rotate: 0 },
+  { type: "diagonal", bg: DG, fg: G, rotate: 0 },
+  { type: "circle", bg: BK, fg: D2, rotate: 0 },
+  { type: "chevron", bg: D1, fg: G, rotate: 90 },
 
-  { type: "stripes",        bg: G,   fg: BK,  rotate: 90  },
-  { type: "arc",            bg: D2,  fg: G,   rotate: 90  },
-  { type: "grid-dots",      bg: D3,  fg: DG,  rotate: 0   },
-  { type: "letter-e",       bg: BK,  fg: G,   rotate: 0   },
+  { type: "stripes", bg: G, fg: BK, rotate: 90 },
+  { type: "arc", bg: D2, fg: G, rotate: 90 },
+  { type: "grid-dots", bg: D3, fg: DG, rotate: 0 },
+  { type: "letter-e", bg: BK, fg: G, rotate: 0 },
 
-  { type: "zigzag",         bg: DG,  fg: G,   rotate: 180 },
-  { type: "square-outline", bg: D1,  fg: G,   rotate: 45  },
-  { type: "triangle",       bg: G,   fg: BK,  rotate: 90  },
-  { type: "quarter-circle", bg: D2,  fg: G,   rotate: 180 },
+  { type: "zigzag", bg: DG, fg: G, rotate: 180 },
+  { type: "square-outline", bg: D1, fg: G, rotate: 45 },
+  { type: "triangle", bg: G, fg: BK, rotate: 90 },
+  { type: "quarter-circle", bg: D2, fg: G, rotate: 180 },
 ];
 
 function TileSVG({ tile, size }: { tile: Tile; size: number }) {
@@ -69,72 +69,72 @@ function TileSVG({ tile, size }: { tile: Tile; size: number }) {
         <circle cx={cx} cy={cx} r={s * 0.38} fill={fg} />
       )}
       {type === "half-circle" && (
-        <path d={`M ${s*0.08} ${cx} A ${s*0.42} ${s*0.42} 0 0 1 ${s*0.92} ${cx} Z`} fill={fg} />
+        <path d={`M ${s * 0.08} ${cx} A ${s * 0.42} ${s * 0.42} 0 0 1 ${s * 0.92} ${cx} Z`} fill={fg} />
       )}
       {type === "quarter-circle" && (
         <path d={`M 0 ${s} A ${s} ${s} 0 0 1 ${s} 0 L ${s} ${s} Z`} fill={fg} />
       )}
       {type === "triangle" && (
-        <polygon points={`${cx},${s*0.12} ${s*0.88},${s*0.85} ${s*0.12},${s*0.85}`} fill={fg} />
+        <polygon points={`${cx},${s * 0.12} ${s * 0.88},${s * 0.85} ${s * 0.12},${s * 0.85}`} fill={fg} />
       )}
       {type === "chevron" && (
         <>
-          <polyline points={`${s*0.12},${s*0.32} ${cx},${s*0.52} ${s*0.88},${s*0.32}`} fill="none" stroke={fg} strokeWidth={s*0.09} strokeLinecap="square"/>
-          <polyline points={`${s*0.12},${s*0.54} ${cx},${s*0.74} ${s*0.88},${s*0.54}`} fill="none" stroke={fg} strokeWidth={s*0.09} strokeLinecap="square"/>
+          <polyline points={`${s * 0.12},${s * 0.32} ${cx},${s * 0.52} ${s * 0.88},${s * 0.32}`} fill="none" stroke={fg} strokeWidth={s * 0.09} strokeLinecap="square" />
+          <polyline points={`${s * 0.12},${s * 0.54} ${cx},${s * 0.74} ${s * 0.88},${s * 0.54}`} fill="none" stroke={fg} strokeWidth={s * 0.09} strokeLinecap="square" />
         </>
       )}
       {type === "stripes" && Array.from({ length: 6 }).map((_, i) => (
         <rect key={i} x={0} y={s * (i * 0.155 + 0.07)} width={s} height={s * 0.075} fill={fg} />
       ))}
       {type === "dots" && [
-        [0.25,0.25],[0.5,0.25],[0.75,0.25],
-        [0.25,0.5],[0.5,0.5],[0.75,0.5],
-        [0.25,0.75],[0.5,0.75],[0.75,0.75],
+        [0.25, 0.25], [0.5, 0.25], [0.75, 0.25],
+        [0.25, 0.5], [0.5, 0.5], [0.75, 0.5],
+        [0.25, 0.75], [0.5, 0.75], [0.75, 0.75],
       ].map(([x, y], i) => (
-        <circle key={i} cx={s*x} cy={s*y} r={s*0.06} fill={fg} />
+        <circle key={i} cx={s * x} cy={s * y} r={s * 0.06} fill={fg} />
       ))}
       {type === "grid-dots" && [
-        [0.2,0.2],[0.5,0.2],[0.8,0.2],
-        [0.2,0.5],[0.5,0.5],[0.8,0.5],
-        [0.2,0.8],[0.5,0.8],[0.8,0.8],
+        [0.2, 0.2], [0.5, 0.2], [0.8, 0.2],
+        [0.2, 0.5], [0.5, 0.5], [0.8, 0.5],
+        [0.2, 0.8], [0.5, 0.8], [0.8, 0.8],
       ].map(([x, y], i) => (
-        <rect key={i} x={s*x - s*0.04} y={s*y - s*0.04} width={s*0.08} height={s*0.08} fill={fg} />
+        <rect key={i} x={s * x - s * 0.04} y={s * y - s * 0.04} width={s * 0.08} height={s * 0.08} fill={fg} />
       ))}
       {type === "arc" && (
-        <path d={`M ${s*0.08} ${s*0.92} A ${s*0.42} ${s*0.42} 0 0 1 ${s*0.92} ${s*0.92}`} fill={fg} />
+        <path d={`M ${s * 0.08} ${s * 0.92} A ${s * 0.42} ${s * 0.42} 0 0 1 ${s * 0.92} ${s * 0.92}`} fill={fg} />
       )}
       {type === "diagonal" && (
         <polygon points={`0,0 ${s},0 ${s},${s}`} fill={fg} />
       )}
       {type === "cross" && (
         <>
-          <rect x={cx - s*0.075} y={s*0.12} width={s*0.15} height={s*0.76} fill={fg} />
-          <rect x={s*0.12} y={cx - s*0.075} width={s*0.76} height={s*0.15} fill={fg} />
+          <rect x={cx - s * 0.075} y={s * 0.12} width={s * 0.15} height={s * 0.76} fill={fg} />
+          <rect x={s * 0.12} y={cx - s * 0.075} width={s * 0.76} height={s * 0.15} fill={fg} />
         </>
       )}
       {type === "wave" && (
         <>
-          <path d={`M 0 ${cx} Q ${s*0.25} ${s*0.22} ${cx} ${cx} Q ${s*0.75} ${s*0.78} ${s} ${cx}`}
-            fill="none" stroke={fg} strokeWidth={s*0.1} strokeLinecap="round"/>
-          <path d={`M 0 ${s*0.7} Q ${s*0.25} ${s*0.42} ${cx} ${s*0.7} Q ${s*0.75} ${s*0.98} ${s} ${s*0.7}`}
-            fill="none" stroke={fg} strokeWidth={s*0.07} strokeLinecap="round" opacity={0.5}/>
+          <path d={`M 0 ${cx} Q ${s * 0.25} ${s * 0.22} ${cx} ${cx} Q ${s * 0.75} ${s * 0.78} ${s} ${cx}`}
+            fill="none" stroke={fg} strokeWidth={s * 0.1} strokeLinecap="round" />
+          <path d={`M 0 ${s * 0.7} Q ${s * 0.25} ${s * 0.42} ${cx} ${s * 0.7} Q ${s * 0.75} ${s * 0.98} ${s} ${s * 0.7}`}
+            fill="none" stroke={fg} strokeWidth={s * 0.07} strokeLinecap="round" opacity={0.5} />
         </>
       )}
       {type === "square-outline" && (
-        <rect x={s*0.18} y={s*0.18} width={s*0.64} height={s*0.64} fill="none" stroke={fg} strokeWidth={s*0.09} />
+        <rect x={s * 0.18} y={s * 0.18} width={s * 0.64} height={s * 0.64} fill="none" stroke={fg} strokeWidth={s * 0.09} />
       )}
       {type === "zigzag" && (
         <polyline
-          points={`0,${s*0.65} ${s*0.2},${s*0.35} ${s*0.4},${s*0.65} ${s*0.6},${s*0.35} ${s*0.8},${s*0.65} ${s},${s*0.35}`}
-          fill="none" stroke={fg} strokeWidth={s*0.09} strokeLinejoin="miter"
+          points={`0,${s * 0.65} ${s * 0.2},${s * 0.35} ${s * 0.4},${s * 0.65} ${s * 0.6},${s * 0.35} ${s * 0.8},${s * 0.65} ${s},${s * 0.35}`}
+          fill="none" stroke={fg} strokeWidth={s * 0.09} strokeLinejoin="miter"
         />
       )}
       {type === "letter-e" && (
         <>
-          <rect x={s*0.25} y={s*0.22} width={s*0.5} height={s*0.1} fill={fg} />
-          <rect x={s*0.25} y={s*0.45} width={s*0.38} height={s*0.1} fill={fg} />
-          <rect x={s*0.25} y={s*0.68} width={s*0.5} height={s*0.1} fill={fg} />
-          <rect x={s*0.25} y={s*0.22} width={s*0.1} height={s*0.56} fill={fg} />
+          <rect x={s * 0.25} y={s * 0.22} width={s * 0.5} height={s * 0.1} fill={fg} />
+          <rect x={s * 0.25} y={s * 0.45} width={s * 0.38} height={s * 0.1} fill={fg} />
+          <rect x={s * 0.25} y={s * 0.68} width={s * 0.5} height={s * 0.1} fill={fg} />
+          <rect x={s * 0.25} y={s * 0.22} width={s * 0.1} height={s * 0.56} fill={fg} />
         </>
       )}
     </svg>
@@ -235,7 +235,7 @@ export default function MosaicHero() {
             marginBottom: "0.8rem",
           }}
         >
-          Video Editor — Seoul
+          Video Editor — Korea
         </p>
         <h1
           style={{
@@ -249,11 +249,11 @@ export default function MosaicHero() {
             textShadow: "0 2px 20px rgba(0,0,0,0.5)",
           }}
         >
-          Every cut is a{" "}
-          <em style={{ color: "#22c55e", fontStyle: "italic" }}>decision.</em>
+          관성을 깨는{" "}
+          <em style={{ color: "#22c55e", fontStyle: "italic" }}>아이디어.</em>
           <br />
-          Every frame tells a{" "}
-          <em style={{ color: "#22c55e", fontStyle: "italic" }}>story.</em>
+          한계 없는{" "}
+          <em style={{ color: "#22c55e", fontStyle: "italic" }}>시도.</em>
         </h1>
         <p
           style={{
@@ -264,7 +264,7 @@ export default function MosaicHero() {
             maxWidth: "440px",
           }}
         >
-          I'm Ecyce — a video editor who shapes rhythm, pacing, and story from raw footage.
+          저는 Ecyce입니다. — 박자감 있는 편집과 명확한 서사로 사람들의 기억에 남는 영상을 만듭니다.
         </p>
       </div>
 
