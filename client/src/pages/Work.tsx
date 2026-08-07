@@ -7,8 +7,19 @@ import { clientGroups } from "@/lib/projects";
 import { Link } from "wouter";
 import { Play } from "lucide-react";
 
-function ProjectCard({ project }: { project: { slug: string; title: string; category: string; year: string; thumbnail: string } }) {
+interface ProjectCardData {
+  slug: string;
+  title: string;
+  category: string;
+  year: string;
+  thumbnail: string;
+  orientation?: "landscape" | "portrait"; // 추가: 영상 방향
+}
+
+function ProjectCard({ project }: { project: ProjectCardData }) {
   const [hovered, setHovered] = useState(false);
+  const isPortrait = project.orientation === "portrait";
+
   return (
     <Link href={`/work/${project.slug}`}>
       <div
@@ -18,7 +29,7 @@ function ProjectCard({ project }: { project: { slug: string; title: string; cate
       >
         <div style={{
           position: "relative",
-          aspectRatio: "16/9",
+          aspectRatio: "16/9", // 카드 비율은 항상 통일
           background: "#111",
           overflow: "hidden",
         }}>
@@ -29,7 +40,8 @@ function ProjectCard({ project }: { project: { slug: string; title: string; cate
             style={{
               width: "100%",
               height: "100%",
-              objectFit: "cover",
+              // 세로 영상은 레터박스(contain), 가로 영상은 꽉 채움(cover)
+              objectFit: isPortrait ? "contain" : "cover",
               display: "block",
               transform: hovered ? "scale(1.04)" : "scale(1)",
               transition: "transform 350ms cubic-bezier(0.23,1,0.32,1)",
@@ -186,8 +198,8 @@ export default function Work() {
         <div style={{ display: "flex", gap: "1.5rem" }}>
           {["Instagram", "YouTube", "LinkedIn"].map(s => (
             <a key={s} href="#" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.65rem", fontWeight: 600, letterSpacing: "0.1em", color: "rgba(240,240,240,0.35)", textDecoration: "none", textTransform: "uppercase", transition: "color 150ms" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#22c55e")}
-              onMouseLeave={e => (e.currentTarget.style.color = "rgba(240,240,240,0.35)")}
+               onMouseEnter={e => (e.currentTarget.style.color = "#22c55e")}
+               onMouseLeave={e => (e.currentTarget.style.color = "rgba(240,240,240,0.35)")}
             >{s}</a>
           ))}
         </div>

@@ -5,9 +5,11 @@ export interface Project {
   category: string;
   year: string;
   thumbnail: string;
+  orientation?: "landscape" | "portrait";
   videoUrl?: string;
   youtubeId?: string;
   description: string;
+  process?: string; // 추가: 제작 과정 (string)
   role: string;
   tools: string[];
   tags: string[];
@@ -21,19 +23,21 @@ export interface ClientGroup {
 
 export const projects: Project[] = [
   {
-    slug: "cinematic-travel-vlog",
-    title: "Cinematic Travel Vlog",
+    slug: "woongjin_saengcha_contest",
+    title: "첫 만남은 너무 어려워, 그런데 생차가 있다면?",
     client: "Personal",
-    category: "Travel",
-    year: "2024",
-    thumbnail: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-    youtubeId: "dQw4w9WgXcQ",
-    description: "A cinematic travel documentary capturing the essence of Southeast Asia. Color graded with a warm, filmic look to evoke nostalgia and wanderlust.",
-    role: "Video Editor, Colorist",
-    tools: ["Premiere Pro", "DaVinci Resolve", "After Effects"],
-    tags: ["Travel", "Documentary", "Color Grading"],
+    category: "Commercial",
+    year: "2026",
+    orientation: "portrait",
+    thumbnail: "https://i.ytimg.com/vi/38XLXKgK6Dc/oar2.jpg?sqp=-oaymwErCJUDEOAESFqQAgHyq4qpAxoIARUAAIhCyAEB2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLCP5ejGdf4qrBIBcRr78AKArLYG3A&usqp=CCk",
+    youtubeId: "38XLXKgK6Dc",
+    description: "어쩌면 흑역사가 되었을 떨떠름한 첫 만남이 '생차'와 함께 하기에 추억이 된다는 이야기를 담은 음료 광고 영상입니다. ",
+    role: "AI Creator",
+    tools: ["Premiere Pro", "After Effects"],
+    tags: ["Commercial", "Shorts"],
     featured: true,
   },
+  /*
   {
     slug: "brand-commercial-launch",
     title: "Brand Commercial Launch",
@@ -76,7 +80,7 @@ export const projects: Project[] = [
     tags: ["Documentary", "Short Film"],
   },
   {
-    slug: "gaming-highlight-reel",
+    slug: "gaming-highlight-reel",                    
     title: "Gaming Highlight Reel",
     client: "Creator Collective",
     category: "Gaming",
@@ -127,6 +131,8 @@ export const projects: Project[] = [
     tools: ["Premiere Pro"],
     tags: ["Corporate", "Event"],
   },
+  
+   */
 ];
 
 export const clientGroups: ClientGroup[] = [
