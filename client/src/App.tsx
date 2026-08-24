@@ -18,7 +18,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route path="/work/:slug" component={ProjectDetail} />
-      <Route path="/404" component={NotFound} />
+      {/*<Route path="/404" component={NotFound} />*/}
       <Route component={NotFound} />
     </Switch>
   );
