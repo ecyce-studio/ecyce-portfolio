@@ -119,6 +119,74 @@ export default function ProjectDetail() {
                 </span>
               ))}
             </div>
+
+            {/* Blog-style content */}
+            {project.content && project.content.length > 0 && (
+              <div style={{ marginTop: "2.5rem", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                {project.content.map((block, i) => {
+                  if (block.type === "heading") {
+                    return (
+                      <h3 key={i} style={{
+                        fontFamily: "'Space Grotesk', sans-serif",
+                        fontSize: "1.3rem",
+                        fontWeight: 700,
+                        color: "#f0f0f0",
+                        lineHeight: 1.3,
+                        margin: 0,
+                        textAlign: "center",
+                      }}>
+                        {block.text}
+                      </h3>
+                    );
+                  }
+                  if (block.type === "text") {
+                    return (
+                      <p key={i} style={{
+                        fontFamily: "'DM Sans', sans-serif",
+                        fontSize: "0.95rem",
+                        color: "rgba(240,240,240,0.8)",
+                        lineHeight: 1.8,
+                        textAlign: "center",
+                      }}>
+                        {block.text}
+                      </p>
+                    );
+                  }
+                  if (block.type === "image") {
+                    return (
+                      <figure key={i} style={{ margin: 0 }}>
+                        <img
+                          src={block.src}
+                          alt={block.caption ?? ""}
+                          loading="lazy"
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            maxHeight: "320px",
+                            display: "block",
+                            objectFit: "contain",
+                          }}
+                        />
+                        {block.caption && (
+                          <figcaption style={{
+                            fontFamily: "'Space Mono', monospace",
+                            fontSize: "0.65rem",
+                            letterSpacing: "0.05em",
+                            color: "rgba(240,240,240,0.4)",
+                            marginTop: "0.6rem",
+                            textAlign: "center",
+                          }}>
+                            {block.caption}
+                          </figcaption>
+                        )}
+                      </figure>
+                    );
+                  }
+                  return null;
+                })}
+              </div>
+            )}
+            
           </div>
 
           {/* Right: Project info */}
@@ -160,6 +228,14 @@ export default function ProjectDetail() {
               <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.4rem" }}>Tools</p>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", color: "#f0f0f0" }}>{project.tools.join(", ")}</p>
             </div>
+
+            {project.aiTools && project.aiTools.length > 0 && (
+              <div style={{ marginBottom: "1.5rem" }}>
+                <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.4rem" }}>AI Tools</p>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", color: "#f0f0f0" }}>{project.aiTools.join(", ")}</p>
+              </div>
+            )}
+
 
             <div style={{ height: 1, background: "rgba(255,255,255,0.08)", marginBottom: "1.5rem" }} />
 

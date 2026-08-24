@@ -91,7 +91,8 @@ function FeaturedCard({ project }: { project: typeof projects[0] }) {
 
 export default function Home() {
   const featured = projects.filter(p => p.featured);
-  const rest = projects.filter(p => !p.featured).slice(0, 3);
+  const rest = projects.filter(p => !p.featured);
+  const displayed = [...featured, ...rest].slice(0, 6);
 
   return (
     <div style={{ background: "#0a0a0a", minHeight: "100vh" }}>
@@ -146,23 +147,13 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Featured 3-col grid */}
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "1.25rem",
-            marginBottom: "1.25rem",
-          }}>
-            {featured.map(p => <FeaturedCard key={p.slug} project={p} />)}
-          </div>
-
-          {/* Secondary row */}
+          {/* 단일 그리드로 통합 — 3열 x 2줄 자동 정렬 */}
           <div style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
             gap: "1.25rem",
           }}>
-            {rest.map(p => <FeaturedCard key={p.slug} project={p} />)}
+            {displayed.map(p => <FeaturedCard key={p.slug} project={p} />)}
           </div>
         </div>
       </section>
@@ -181,11 +172,11 @@ export default function Home() {
               fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)",
               fontWeight: 700,
               color: "#f0f0f0",
-              lineHeight: 1.2,
+              lineHeight: 1.4,
               marginBottom: "1.25rem",
             }}>
-              Every frame is a choice.<br />
-              <span style={{ color: "#22c55e" }}>I make them count.</span>
+              무한한 상상으로부터 <br />
+              <span style={{ color: "#22c55e" }}>영상을 그려냅니다.</span>
             </h2>
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -194,7 +185,7 @@ export default function Home() {
               lineHeight: 1.75,
               marginBottom: "2rem",
             }}>
-              I'm Ecyce — a video editor who works in rhythm, pacing, and story. Every cut is deliberate, every transition earned.
+              저는 Ecyce 입니다. - 전 게임 개발자이자 현 영상 제작자로 활동하고 있습니다. 영상 제작을 배운 지는 반년 남짓이지만, 무언가를 상상하고 완성하는 감각은 그보다 훨씬 오래되었습니다. 유쾌함, 트렌디한 감각을 담아 영상을 만듭니다.
             </p>
             <Link href="/about">
               <span style={{
@@ -220,38 +211,38 @@ export default function Home() {
               </span>
             </Link>
           </div>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "1rem",
-          }}>
-            {[
-              { num: "50+", label: "Projects Completed" },
-              { num: "4+", label: "Years Experience" },
-              { num: "20+", label: "Happy Clients" },
-              { num: "∞", label: "Frames Crafted" },
-            ].map(stat => (
-              <div key={stat.label} style={{
-                padding: "1.5rem",
-                border: "1px solid rgba(255,255,255,0.07)",
-                background: "#111",
-              }}>
-                <p style={{
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  fontSize: "2rem",
-                  fontWeight: 700,
-                  color: "#22c55e",
-                  margin: "0 0 0.25rem",
-                  lineHeight: 1,
-                }}>{stat.num}</p>
-                <p style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: "0.8rem",
-                  color: "rgba(240,240,240,0.45)",
-                }}>{stat.label}</p>
-              </div>
-            ))}
-          </div>
+          {/*<div style={{*/}
+          {/*  display: "grid",*/}
+          {/*  gridTemplateColumns: "1fr 1fr",*/}
+          {/*  gap: "1rem",*/}
+          {/*}}>*/}
+          {/*  {[*/}
+          {/*    { num: "50+", label: "Projects Completed" },*/}
+          {/*    { num: "4+", label: "Years Experience" },*/}
+          {/*    { num: "20+", label: "Happy Clients" },*/}
+          {/*    { num: "∞", label: "Frames Crafted" },*/}
+          {/*  ].map(stat => (*/}
+          {/*    <div key={stat.label} style={{*/}
+          {/*      padding: "1.5rem",*/}
+          {/*      border: "1px solid rgba(255,255,255,0.07)",*/}
+          {/*      background: "#111",*/}
+          {/*    }}>*/}
+          {/*      <p style={{*/}
+          {/*        fontFamily: "'Space Grotesk', sans-serif",*/}
+          {/*        fontSize: "2rem",*/}
+          {/*        fontWeight: 700,*/}
+          {/*        color: "#22c55e",*/}
+          {/*        margin: "0 0 0.25rem",*/}
+          {/*        lineHeight: 1,*/}
+          {/*      }}>{stat.num}</p>*/}
+          {/*      <p style={{*/}
+          {/*        fontFamily: "'DM Sans', sans-serif",*/}
+          {/*        fontSize: "0.8rem",*/}
+          {/*        color: "rgba(240,240,240,0.45)",*/}
+          {/*      }}>{stat.label}</p>*/}
+          {/*    </div>*/}
+          {/*  ))}*/}
+          {/*</div>*/}
         </div>
       </section>
 
@@ -269,11 +260,14 @@ export default function Home() {
           © {new Date().getFullYear()} ECYCE. ALL RIGHTS RESERVED.
         </span>
         <div style={{ display: "flex", gap: "1.5rem" }}>
-          {["Instagram", "YouTube", "LinkedIn"].map(s => (
-            <a key={s} href="#" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.65rem", fontWeight: 600, letterSpacing: "0.1em", color: "rgba(240,240,240,0.35)", textDecoration: "none", textTransform: "uppercase", transition: "color 150ms" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#22c55e")}
-              onMouseLeave={e => (e.currentTarget.style.color = "rgba(240,240,240,0.35)")}
-            >{s}</a>
+          {[
+            { label: "Instagram", href: "https://www.instagram.com/ecyce.studio/" },
+            { label: "YouTube", href: "https://www.youtube.com/@ecyce.studio" },
+          ].map(s => (
+            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.65rem", fontWeight: 600, letterSpacing: "0.1em", color: "rgba(240,240,240,0.35)", textDecoration: "none", textTransform: "uppercase", transition: "color 150ms" }}
+               onMouseEnter={e => (e.currentTarget.style.color = "#22c55e")}
+               onMouseLeave={e => (e.currentTarget.style.color = "rgba(240,240,240,0.35)")}
+            >{s.label}</a>
           ))}
         </div>
       </footer>

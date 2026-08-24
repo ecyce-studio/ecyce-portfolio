@@ -195,12 +195,16 @@ export default function Work() {
         <span style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.65rem", color: "rgba(240,240,240,0.3)", letterSpacing: "0.08em" }}>
           © {new Date().getFullYear()} ECYCE. ALL RIGHTS RESERVED.
         </span>
+        
         <div style={{ display: "flex", gap: "1.5rem" }}>
-          {["Instagram", "YouTube", "LinkedIn"].map(s => (
-            <a key={s} href="#" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.65rem", fontWeight: 600, letterSpacing: "0.1em", color: "rgba(240,240,240,0.35)", textDecoration: "none", textTransform: "uppercase", transition: "color 150ms" }}
+          {[
+            { label: "Instagram", href: "https://www.instagram.com/ecyce.studio/" },
+            { label: "YouTube", href: "https://www.youtube.com/@ecyce.studio" },
+          ].map(s => (
+            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.65rem", fontWeight: 600, letterSpacing: "0.1em", color: "rgba(240,240,240,0.35)", textDecoration: "none", textTransform: "uppercase", transition: "color 150ms" }}
                onMouseEnter={e => (e.currentTarget.style.color = "#22c55e")}
                onMouseLeave={e => (e.currentTarget.style.color = "rgba(240,240,240,0.35)")}
-            >{s}</a>
+            >{s.label}</a>
           ))}
         </div>
       </footer>

@@ -4,10 +4,10 @@ import Navbar from "@/components/Navbar";
 import { Link } from "wouter";
 
 const skills = [
-  { category: "Editing", items: ["Adobe Premiere Pro", "DaVinci Resolve", "Final Cut Pro"] },
-  { category: "Motion", items: ["After Effects", "Cinema 4D", "Motion"] },
-  { category: "Color", items: ["DaVinci Resolve", "Lightroom", "Lumetri Color"] },
-  { category: "Audio", items: ["Adobe Audition", "Logic Pro", "Fairlight"] },
+  { category: "Editing", items: ["Adobe Premiere Pro", "After Effects", "Capcut"] },
+  { category: "AI Tools", items: ["Google Flow", "MidJourney", "Higgsfield"] },
+  { category: "Image", items: ["Adobe Photoshop", "Procreate", "Clip Studio"] },
+  { category: "PM", items: ["Notion", "Figma", "Jira"] },
 ];
 
 // Small geometric accent SVG for section dividers
@@ -63,9 +63,8 @@ export default function About() {
             lineHeight: 1.05,
             margin: 0,
           }}>
-            Every frame<br />
-            is a choice.<br />
-            <span style={{ color: "#22c55e" }}>I make them count.</span>
+            무한한 상상으로부터<br />
+            <span style={{ color: "#22c55e" }}> 영상을 그려냅니다.<br /></span>
           </h1>
         </div>
 
@@ -82,7 +81,7 @@ export default function About() {
               color: "rgba(240,240,240,0.8)",
               marginBottom: "1.5rem",
             }}>
-              I'm Ecyce, a video editor who works in rhythm, pacing, and story. Every cut is deliberate — a decision that shapes how a sequence breathes, where tension builds, and when emotion lands.
+              저는 Ecyce - 박자감과 이야기를 중심으로 영상을 만드는 AI Creator입니다.
             </p>
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -91,7 +90,19 @@ export default function About() {
               color: "rgba(240,240,240,0.8)",
               marginBottom: "1.5rem",
             }}>
-              With experience across commercial, documentary, music video, and YouTube content, I bring a precise eye and a deep respect for the edit. Great editing is invisible — it pulls you into the story without you noticing the craft.
+              영상을 제작할 때엔 저만의 유쾌하고 트렌디한 감각을 담아 만듭니다.
+              학창 시절부터 예술 작품을 탐미하고 코미디를 즐겨 보는 것이 취미였고,
+              그렇게 쌓인 취향은 지금 제가 만드는 영상 곳곳에 저만의 포인트로
+              녹아 있습니다.
+              <br /><br />
+              상상을 현실로 옮기는 일을 체계화된 방식으로 진행합니다. 게임 개발자로 일하던 시절부터
+              Notion, Figjam 등으로 콘텐츠를 계획적으로 설계해 제작해왔고,
+              이 습관은 지금도 이어져 영상 프로젝트를 더 정확하고 수월하게
+              완성하는 힘이 되고 있습니다.
+              <br /><br />
+              또한 인디 게임 사업에 도전하며 익힌 마케팅과 사업 지식은, 영상을
+              만들기 전 타겟층을 명확히 하는 눈으로 이어졌습니다. 누가 볼지를
+              먼저 그리고 나서 영상을 제작해, 보는 사람의 흥미를 파고들 수 있도록 노력하고 있습니다.
             </p>
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -99,32 +110,41 @@ export default function About() {
               lineHeight: 1.8,
               color: "rgba(240,240,240,0.8)",
             }}>
-              Based in Seoul. Available worldwide.
+              함께 이야기를 만들어갈 파트너를 찾고 있습니다. <br/><br/>
             </p>
 
-            <div style={{ marginTop: "2.5rem" }}>
-              <Link href="/contact">
-                <span style={{
-                  display: "inline-block",
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  fontSize: "0.75rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.14em",
-                  textTransform: "uppercase",
-                  color: "#0a0a0a",
-                  background: "#22c55e",
-                  padding: "0.85rem 2rem",
-                  textDecoration: "none",
-                  transition: "background 150ms",
-                  cursor: "pointer",
-                }}
-                onMouseEnter={e => (e.currentTarget.style.background = "#16a34a")}
-                onMouseLeave={e => (e.currentTarget.style.background = "#22c55e")}
-                >
-                  Start a Project →
-                </span>
-              </Link>
-            </div>
+            <p style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "1.05rem",
+              lineHeight: 1.8,
+              color: "#22c55e",
+            }}>
+              [Contact] <b>ecyce.studio@gmail.com</b>
+            </p>
+
+            {/*<div style={{ marginTop: "2.5rem" }}>*/}
+            {/*  <Link href="/contact">*/}
+            {/*    <span style={{*/}
+            {/*      display: "inline-block",*/}
+            {/*      fontFamily: "'Space Grotesk', sans-serif",*/}
+            {/*      fontSize: "0.75rem",*/}
+            {/*      fontWeight: 700,*/}
+            {/*      letterSpacing: "0.14em",*/}
+            {/*      textTransform: "uppercase",*/}
+            {/*      color: "#0a0a0a",*/}
+            {/*      background: "#22c55e",*/}
+            {/*      padding: "0.85rem 2rem",*/}
+            {/*      textDecoration: "none",*/}
+            {/*      transition: "background 150ms",*/}
+            {/*      cursor: "pointer",*/}
+            {/*    }}*/}
+            {/*    onMouseEnter={e => (e.currentTarget.style.background = "#16a34a")}*/}
+            {/*    onMouseLeave={e => (e.currentTarget.style.background = "#22c55e")}*/}
+            {/*    >*/}
+            {/*      Start a Project →*/}
+            {/*    </span>*/}
+            {/*  </Link>*/}
+            {/*</div>*/}
           </div>
 
           {/* Skills */}

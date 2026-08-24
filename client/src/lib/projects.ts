@@ -1,3 +1,10 @@
+export interface ContentBlock {
+  type: "text" | "heading" | "image";
+  text?: string;       // type이 "text" 또는 "heading"일 때
+  src?: string;         // type이 "image"일 때
+  caption?: string;     // 이미지 밑 캡션 (선택)
+}
+
 export interface Project {
   slug: string;
   title: string;
@@ -9,9 +16,11 @@ export interface Project {
   videoUrl?: string;
   youtubeId?: string;
   description: string;
-  process?: string; // 추가: 제작 과정 (string)
+  process?: string;
+  content?: ContentBlock[];
   role: string;
   tools: string[];
+  aiTools?: string[];
   tags: string[];
   featured?: boolean;
 }
@@ -29,14 +38,124 @@ export const projects: Project[] = [
     category: "Commercial",
     year: "2026",
     orientation: "portrait",
-    thumbnail: "https://i.ytimg.com/vi/38XLXKgK6Dc/oar2.jpg?sqp=-oaymwErCJUDEOAESFqQAgHyq4qpAxoIARUAAIhCyAEB2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLCP5ejGdf4qrBIBcRr78AKArLYG3A&usqp=CCk",
+    thumbnail: "https://i.ytimg.com/vi/38XLXKgK6Dc/hqdefault.jpg",
     youtubeId: "38XLXKgK6Dc",
     description: "어쩌면 흑역사가 되었을 떨떠름한 첫 만남이 '생차'와 함께 하기에 추억이 된다는 이야기를 담은 음료 광고 영상입니다. ",
     role: "AI Creator",
     tools: ["Premiere Pro", "After Effects"],
-    tags: ["Commercial", "Shorts"],
+    aiTools: ["Seedream", "NanoBanana", "Claude", "Seedance", "Kling Pro"],
+    tags: ["Commercial", "Shorts", "Text Animation"],
+    content: [
+      { type: "heading", text: "PROCESS" },
+      { type: "text", text: "기획 > AI 이미지 제작 > AI 영상 제작 (Seedance 2.0, Kling O3 Pro) > 영상 편집" },
+      { type: "heading", text: "AI IMAGE" },
+      { type: "text", text: "[Character Sheet] 전신 이미지 생성(Seedream 4.5) > 시트 이미지로 변경 (NanoBanana)" },
+      { type: "image", src: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd2ol7oe51mr4n9.cloudfront.net%2Fuser_3CbkxukKmtCGExZ5uktUQ3QYa2z%2Fbdc3ebb1-e20c-407a-b679-5cb2a1010a2c.png&w=1920&q=85", caption: "캐릭터 1 - 유나" },
+      { type: "image", src: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd2ol7oe51mr4n9.cloudfront.net%2Fuser_3CbkxukKmtCGExZ5uktUQ3QYa2z%2Ff03d975f-9a19-465f-8862-b8e8a4177a29.png&w=1920&q=85", caption: "캐릭터 2 - 효정" },
+      { type: "text", text: "[Background] 레퍼런스 기반 배경 이미지 생성 (Seedream)" },
+      { type: "image", src: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_3CbkxukKmtCGExZ5uktUQ3QYa2z%2Fhf_20260804_013401_c9b2ad14-30d2-46ff-b0a8-c4e5bcef8861.png&w=1920&q=85" },
+      { type: "image", src: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_3CbkxukKmtCGExZ5uktUQ3QYa2z%2Fhf_20260805_014854_904ddd37-4058-4074-b02e-2d43b18ca8a2_min.webp&w=1920&q=85" },
+      { type: "text", text: "[Prop] 입체감이 명확한 음료 이미지로 재생성 (GPT)" },
+      { type: "image", src: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd2ol7oe51mr4n9.cloudfront.net%2Fuser_3CbkxukKmtCGExZ5uktUQ3QYa2z%2F5feb962b-2996-4fec-aac2-83e7bd6d6ca4.png&w=1920&q=85" },
+    ],
     featured: true,
   },
+
+  {
+    slug: "beyond_sound",
+    title: "Beyond Sound",
+    client: "Personal",
+    category: "Art Film",
+    year: "2026",
+    orientation: "portrait",
+    thumbnail: "https://i.ytimg.com/vi/OxO8BnWn4YM/hqdefault.jpg",
+    youtubeId: "OxO8BnWn4YM",
+    description: "목소리 역시 수많은 소리(Sound) 중 하나이지만, 화자의 고유성이 더해질 때 비로소 단 하나뿐인 '목소리(Voice)'가 됨을 AI 비주얼 아트로 표현한 작품입니다. 유쇼페 공모전 출품작.",
+    role: "AI Creator",
+    tools: ["Premiere Pro", "After Effects"],
+    aiTools: ["Midjourney", "Kling", "Seedance", "Claude"],
+    tags: ["Shorts", "Art Film"],
+  },
+
+  {
+    slug: "guirang_workshop_promo",
+    title: "귀랑공방 홍보 영상 1편",
+    client: "Personal",
+    category: "Brand Promotional Video",
+    year: "2026",
+    orientation: "portrait",
+    thumbnail: "https://i.ytimg.com/vi/IXd5X1n1cCQ/hqdefault.jpg",
+    youtubeId: "IXd5X1n1cCQ",
+    description: "팀 프로젝트로 팀원이 운영하는 공방의 브랜드를 알리기 위해 유쾌하고 개성 있는 톤으로 제작한 홍보 영상 시리즈 1편입니다.",
+    role: "PM, Planning, AI Creator",
+    tools: ["Premiere Pro"],
+    aiTools: ["NanoBanana", "GPT", "Omni Flash", "Kling"],
+    tags: ["Shorts", "Advertisement"],
+  },
+
+  {
+    slug: "guirang_workshop_promo",
+    title: "귀랑공방 홍보 영상 2편",
+    client: "Personal",
+    category: "Brand Promotional Video",
+    year: "2026",
+    orientation: "portrait",
+    thumbnail: "https://i.ytimg.com/vi/fjfZX1OPVx4/hqdefault.jpg",
+    youtubeId: "fjfZX1OPVx4",
+    description: "팀 프로젝트로 팀원이 운영하는 공방의 브랜드를 알리기 위해 유쾌하고 개성 있는 톤으로 제작한 홍보 영상 시리즈 2편입니다.",
+    role: "PM, Planning, AI Creator",
+    tools: ["Premiere Pro"],
+    aiTools: ["NanoBanana", "GPT", "Omni Flash", "Kling"],
+    tags: ["Shorts", "Advertisement"],
+  },
+
+  {
+    slug: "olidia_glowing_skin",
+    title: "올리디아, 빛나는 피부를 찾아서",
+    client: "Personal",
+    category: "Advertisement",
+    year: "2026",
+    orientation: "portrait",
+    thumbnail: "https://i.ytimg.com/vi/FeydfhqrjNk/hqdefault.jpg",
+    youtubeId: "FeydfhqrjNk",
+    description: "피부 컨디션이 나빠져 고민이던 직장인 A씨. 어느 날 몰라보게 좋아진 동료 B의 피부를 보고 그 비법을 찾아 나서게 되는 이야기입니다. 올리디아 AI 29역 숏폼왕 공모전 출품작.",
+    role: "AI Creator",
+    tools: ["Premiere Pro"],
+    aiTools: ["NanoBanana", "GPT", "Omni Flash"],
+    tags: ["Shorts", "Advertisement"],
+  },
+
+  {
+    slug: "billlie_work_fmv",
+    title: "Billlie | 'Work' M/V가 없어서 만들어본 FMV",
+    client: "Personal",
+    category: "Music Video",
+    year: "2026",
+    orientation: "landscape",
+    thumbnail: "https://i.ytimg.com/vi/oS2ea0jQPYA/hqdefault.jpg",
+    youtubeId: "oS2ea0jQPYA",
+    description: "빌리(Billlie)의 'Work'를 들으면 그 순간부터 패션쇼가 펼쳐진다는 콘셉트로 제작한 뮤직비디오입니다. 비트에 맞춰 영상을 편집하고 중간중간 모션 그래픽을 더했습니다.",
+    role: "AI Creator, Motion Graphics",
+    tools: ["Premiere Pro", "After Effects"],
+    aiTools: ["NanoBanana", "Omni Flash", "Kling"],
+    tags: ["Long-form", "Music Video", "Motion Graphics"],
+  },
+
+  {
+    slug: "54321_amazing_digital_circus_fmv",
+    title: "54321 | The Amazing Digital Circus [FMV]",
+    client: "Personal",
+    category: "Music Video",
+    year: "2026",
+    orientation: "landscape",
+    thumbnail: "https://i.ytimg.com/vi/OnPhj1qvxjw/hqdefault.jpg",
+    youtubeId: "OnPhj1qvxjw",
+    description: "애니메이션 '더 어메이징 디지털 서커스'의 팬 뮤직비디오로, 남녀 듀엣 곡에 맞춰 등장인물에 포커스를 맞춘 연출을 시도했습니다. 노래의 비트에 맞춰 영상을 편집했습니다.",
+    role: "Editor, Rotoscoping",
+    tools: ["Premiere Pro", "After Effects"],
+    tags: ["Long-form", "Music Video"],
+  },
+  
   /*
   {
     slug: "brand-commercial-launch",
@@ -140,18 +259,18 @@ export const clientGroups: ClientGroup[] = [
     name: "Personal",
     projects: projects.filter(p => p.client === "Personal"),
   },
-  {
-    name: "Studio A",
-    projects: projects.filter(p => p.client === "Studio A"),
-  },
-  {
-    name: "Creator Collective",
-    projects: projects.filter(p => p.client === "Creator Collective"),
-  },
-  {
-    name: "Freelance",
-    projects: projects.filter(p => p.client === "Freelance"),
-  },
+  // {
+  //   name: "Studio A",
+  //   projects: projects.filter(p => p.client === "Studio A"),
+  // },
+  // {
+  //   name: "Creator Collective",
+  //   projects: projects.filter(p => p.client === "Creator Collective"),
+  // },
+  // {
+  //   name: "Freelance",
+  //   projects: projects.filter(p => p.client === "Freelance"),
+  // },
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {

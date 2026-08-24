@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 
 const navLinks = [
-  { href: "/", label: "Work" },
+  { href: "/work", label: "Work" },
   { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  // { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
