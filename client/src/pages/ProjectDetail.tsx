@@ -1,9 +1,10 @@
 // Ecyce Portfolio — Project Detail Page
 // Style: Dark Craft — left video embed, right project info
+import { useState } from "react";
 import { useParams, Link } from "wouter";
 import Navbar from "@/components/Navbar";
 import { getProjectBySlug, projects } from "@/lib/projects";
-import { ArrowLeft, Play } from "lucide-react";
+import { ArrowLeft, Play, ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function ProjectDetail() {
   const params = useParams<{ slug: string }>();
@@ -24,8 +25,15 @@ export default function ProjectDetail() {
     );
   }
 
-  // Related projects (same client, different slug)
-  const related = projects.filter(p => p.client === project.client && p.slug !== project.slug).slice(0, 3);
+  // Related projects (same category, different slug) — full list, paged
+  const related = projects.filter(p => p.category === project.category && p.slug !== project.slug);
+  const [page, setPage] = useState(0);
+  const itemsPerPage = 3;
+  const totalPages = Math.ceil(related.length / itemsPerPage);
+  const paged = related.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage);
+
+  const goPrev = () => setPage(p => Math.max(0, p - 1));
+  const goNext = () => setPage(p => Math.min(totalPages - 1, p + 1));
 
   return (
     <div style={{ background: "#0a0a0a", minHeight: "100vh" }}>
@@ -49,8 +57,8 @@ export default function ProjectDetail() {
             transition: "color 150ms",
             cursor: "pointer",
           }}
-          onMouseEnter={e => (e.currentTarget.style.color = "#22c55e")}
-          onMouseLeave={e => (e.currentTarget.style.color = "rgba(240,240,240,0.5)")}
+                onMouseEnter={e => (e.currentTarget.style.color = "#22c55e")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(240,240,240,0.5)")}
           >
             <ArrowLeft size={14} />
             Back to Work
@@ -186,7 +194,7 @@ export default function ProjectDetail() {
                 })}
               </div>
             )}
-            
+
           </div>
 
           {/* Right: Project info */}
@@ -250,19 +258,73 @@ export default function ProjectDetail() {
         {related.length > 0 && (
           <div style={{ marginTop: "5rem" }}>
             <div style={{ height: 1, background: "rgba(255,255,255,0.07)", marginBottom: "3rem" }} />
-            <h2 style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "1rem",
-              fontWeight: 600,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "rgba(240,240,240,0.5)",
+
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
               marginBottom: "1.5rem",
             }}>
-              More from {project.client}
-            </h2>
+              <h2 style={{
+                fontFamily: "'Space Grotesk', sans-serif",
+                fontSize: "1rem",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "rgba(240,240,240,0.5)",
+                margin: 0,
+              }}>
+                More in {project.category}
+              </h2>
+
+              {totalPages > 1 && (
+                <div style={{ display: "flex", gap: "0.5rem" }}>
+                  <button
+                    onClick={goPrev}
+                    disabled={page === 0}
+                    style={{
+                      width: 36,
+                      height: 36,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      background: "transparent",
+                      border: "1px solid rgba(255,255,255,0.15)",
+                      color: page === 0 ? "rgba(240,240,240,0.2)" : "#f0f0f0",
+                      cursor: page === 0 ? "default" : "pointer",
+                      transition: "border-color 150ms, color 150ms",
+                    }}
+                    onMouseEnter={e => { if (page !== 0) { e.currentTarget.style.borderColor = "#22c55e"; e.currentTarget.style.color = "#22c55e"; } }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.color = page === 0 ? "rgba(240,240,240,0.2)" : "#f0f0f0"; }}
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    onClick={goNext}
+                    disabled={page >= totalPages - 1}
+                    style={{
+                      width: 36,
+                      height: 36,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      background: "transparent",
+                      border: "1px solid rgba(255,255,255,0.15)",
+                      color: page >= totalPages - 1 ? "rgba(240,240,240,0.2)" : "#f0f0f0",
+                      cursor: page >= totalPages - 1 ? "default" : "pointer",
+                      transition: "border-color 150ms, color 150ms",
+                    }}
+                    onMouseEnter={e => { if (page < totalPages - 1) { e.currentTarget.style.borderColor = "#22c55e"; e.currentTarget.style.color = "#22c55e"; } }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.color = page >= totalPages - 1 ? "rgba(240,240,240,0.2)" : "#f0f0f0"; }}
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+              )}
+            </div>
+
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }}>
-              {related.map(p => (
+              {paged.map(p => (
                 <Link key={p.slug} href={`/work/${p.slug}`}>
                   <div>
                     <div className="project-thumb" style={{ aspectRatio: "16/9", background: "#111" }}>
@@ -282,4 +344,3 @@ export default function ProjectDetail() {
     </div>
   );
 }
-
