@@ -10,7 +10,7 @@
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
     "format": "prettier --write .",
-    "deploy": "vite build && gh-pages -d dist/public"
+    "deploy": "npm run build && gh-pages -d dist/public"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
