@@ -134,7 +134,7 @@ export default function Work() {
           textTransform: "uppercase",
           marginBottom: "0.75rem",
         }}>
-          {language === "en" ? "Portfolio" : "포트폴리오"}
+          Portfolio
         </p>
         <h1 style={{
           fontFamily: "'Space Grotesk', sans-serif",
@@ -144,7 +144,7 @@ export default function Work() {
           margin: 0,
           lineHeight: 1.1,
         }}>
-          {language === "en" ? "Video Editing Work" : "영상 편집 작업"}
+          Video Editing Work
         </h1>
       </div>
 

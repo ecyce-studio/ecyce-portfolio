@@ -237,7 +237,7 @@ export default function MosaicHero() {
             marginBottom: "0.8rem",
           }}
         >
-          {language === "en" ? "Video Editor — Korea" : "영상 편집자 — 한국"}
+          Video Editor — Korea
         </p>
         <h1
           style={{

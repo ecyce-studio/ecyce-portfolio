@@ -8,15 +8,10 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
   const { language, setLanguage } = useLanguage();
-  const navLinks = language === "en"
-    ? [
-        { href: "/work", label: "Work" },
-        { href: "/about", label: "About" },
-      ]
-    : [
-        { href: "/work", label: "작업" },
-        { href: "/about", label: "소개" },
-      ];
+  const navLinks = [
+    { href: "/work", label: "Work" },
+    { href: "/about", label: "About" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);

@@ -56,7 +56,7 @@ export default function About() {
             textTransform: "uppercase",
             marginBottom: "0.75rem",
           }}>
-            {language === "en" ? "About" : "소개"}
+            About
           </p>
           <h1 style={{
             fontFamily: "'Space Grotesk', sans-serif",
@@ -183,7 +183,7 @@ export default function About() {
               textTransform: "uppercase",
               marginBottom: "1.5rem",
             }}>
-              {language === "en" ? "Tools & Skills" : "도구 및 역량"}
+              Tools & Skills
             </p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
               {skills.map(group => (

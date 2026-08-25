@@ -120,7 +120,7 @@ export default function Home() {
                 color: "#22c55e",
                 textTransform: "uppercase",
                 marginBottom: "0.5rem",
-              }}>{language === "en" ? "Work" : "작업"}</p>
+              }}>Work</p>
               <h2 style={{
                 fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "clamp(1.4rem, 3vw, 2rem)",
@@ -128,7 +128,7 @@ export default function Home() {
                 color: "#f0f0f0",
                 margin: 0,
               }}>
-                {language === "en" ? "Recent Projects" : "최근 프로젝트"}
+                Recent Projects
               </h2>
             </div>
             <Link href="/work">
@@ -145,7 +145,7 @@ export default function Home() {
                 textDecoration: "none",
                 transition: "gap 150ms",
               }}>
-                {language === "en" ? "View All" : "전체 보기"} <ArrowRight size={14} />
+                View All <ArrowRight size={14} />
               </span>
             </Link>
           </div>
@@ -169,7 +169,7 @@ export default function Home() {
       }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
           <div>
-            <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.18em", color: "#22c55e", textTransform: "uppercase", marginBottom: "1rem" }}>{language === "en" ? "About" : "소개"}</p>
+            <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.18em", color: "#22c55e", textTransform: "uppercase", marginBottom: "1rem" }}>About</p>
             <h2 style={{
               fontFamily: "'Space Grotesk', sans-serif",
               fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)",
@@ -221,7 +221,7 @@ export default function Home() {
                 onMouseEnter={e => (e.currentTarget.style.background = "#16a34a")}
                 onMouseLeave={e => (e.currentTarget.style.background = "#22c55e")}
               >
-                {language === "en" ? "Learn More" : "자세히 보기"} <ArrowRight size={13} />
+                Learn More <ArrowRight size={13} />
               </span>
             </Link>
           </div>
