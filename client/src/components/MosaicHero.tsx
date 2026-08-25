@@ -2,6 +2,7 @@
 // Style: Dark Craft — geometric tile grid with green/black/dark palette
 // Inspired by matheus.works mosaic grid hero, adapted with electric green theme
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type TileType = "circle" | "half-circle" | "triangle" | "chevron" | "stripes" | "dots" | "arc" | "diagonal" | "cross" | "wave" | "square-outline" | "letter-e" | "zigzag" | "quarter-circle" | "grid-dots";
 
@@ -143,6 +144,7 @@ function TileSVG({ tile, size }: { tile: Tile; size: number }) {
 
 export default function MosaicHero() {
   const [visible, setVisible] = useState(false);
+  const { language } = useLanguage();
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 60);
@@ -235,7 +237,7 @@ export default function MosaicHero() {
             marginBottom: "0.8rem",
           }}
         >
-          Video Editor — Korea
+          {language === "en" ? "Video Editor — Korea" : "영상 편집자 — 한국"}
         </p>
         <h1
           style={{
@@ -249,11 +251,21 @@ export default function MosaicHero() {
             textShadow: "0 2px 20px rgba(0,0,0,0.5)",
           }}
         >
-          관성을 깨는{" "}
-          <em style={{ color: "#22c55e", fontStyle: "italic" }}>아이디어.</em>
-          <br />
-          한계 없는{" "}
-          <em style={{ color: "#22c55e", fontStyle: "italic" }}>시도.</em>
+          {language === "en" ? (
+            <>
+              Ideas that break <em style={{ color: "#22c55e", fontStyle: "italic" }}>inertia.</em>
+              <br />
+              Limitless <em style={{ color: "#22c55e", fontStyle: "italic" }}>experiments.</em>
+            </>
+          ) : (
+            <>
+              관성을 깨는{" "}
+              <em style={{ color: "#22c55e", fontStyle: "italic" }}>아이디어.</em>
+              <br />
+              한계 없는{" "}
+              <em style={{ color: "#22c55e", fontStyle: "italic" }}>시도.</em>
+            </>
+          )}
         </h1>
         <p
           style={{
@@ -264,7 +276,9 @@ export default function MosaicHero() {
             maxWidth: "440px",
           }}
         >
-          저는 Ecyce입니다. — 박자감 있는 편집과 명확한 서사로 사람들의 기억에 남는 영상을 만듭니다.
+          {language === "en"
+            ? "I’m Ecyce — an AI creator crafting memorable videos through rhythmic editing and clear storytelling."
+            : "저는 Ecyce입니다. — 박자감 있는 편집과 명확한 서사로 사람들의 기억에 남는 영상을 만듭니다."}
         </p>
       </div>
 

@@ -3,12 +3,15 @@
 import { useState } from "react";
 import { useParams, Link } from "wouter";
 import Navbar from "@/components/Navbar";
-import { getProjectBySlug, projects } from "@/lib/projects";
+import { getLocalizedProjectBySlug, getLocalizedProjects } from "@/lib/projects";
 import { ArrowLeft, Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ProjectDetail() {
   const params = useParams<{ slug: string }>();
-  const project = getProjectBySlug(params.slug);
+  const { language } = useLanguage();
+  const project = getLocalizedProjectBySlug(params.slug, language);
+  const localizedProjects = getLocalizedProjects(language);
 
   if (!project) {
     return (
@@ -16,9 +19,9 @@ export default function ProjectDetail() {
         <Navbar />
         <div style={{ textAlign: "center" }}>
           <p style={{ color: "#22c55e", fontFamily: "'Space Mono', monospace", fontSize: "0.7rem", letterSpacing: "0.15em" }}>404</p>
-          <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", color: "#f0f0f0", fontSize: "2rem", marginTop: "1rem" }}>Project not found</h1>
+          <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", color: "#f0f0f0", fontSize: "2rem", marginTop: "1rem" }}>{language === "en" ? "Project not found" : "프로젝트를 찾을 수 없습니다"}</h1>
           <Link href="/work">
-            <span style={{ color: "#22c55e", fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>← Back to Work</span>
+            <span style={{ color: "#22c55e", fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>← {language === "en" ? "Back to Work" : "작업 목록으로"}</span>
           </Link>
         </div>
       </div>
@@ -26,7 +29,7 @@ export default function ProjectDetail() {
   }
 
   // Related projects (same category, different slug) — full list, paged
-  const related = projects.filter(p => p.category === project.category && p.slug !== project.slug);
+  const related = localizedProjects.filter(p => p.category === project.category && p.slug !== project.slug);
   const [page, setPage] = useState(0);
   const itemsPerPage = 3;
   const totalPages = Math.ceil(related.length / itemsPerPage);
@@ -61,7 +64,7 @@ export default function ProjectDetail() {
                 onMouseLeave={e => (e.currentTarget.style.color = "rgba(240,240,240,0.5)")}
           >
             <ArrowLeft size={14} />
-            Back to Work
+            {language === "en" ? "Back to Work" : "작업 목록으로"}
           </span>
         </Link>
 
@@ -223,23 +226,23 @@ export default function ProjectDetail() {
             <div style={{ height: 1, background: "rgba(255,255,255,0.08)", marginBottom: "1.5rem" }} />
 
             <div style={{ marginBottom: "1.5rem" }}>
-              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.4rem" }}>Client</p>
+              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.4rem" }}>{language === "en" ? "Client" : "클라이언트"}</p>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", color: "#f0f0f0" }}>{project.client}</p>
             </div>
 
             <div style={{ marginBottom: "1.5rem" }}>
-              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.4rem" }}>Role</p>
+              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.4rem" }}>{language === "en" ? "Role" : "역할"}</p>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", color: "#f0f0f0" }}>{project.role}</p>
             </div>
 
             <div style={{ marginBottom: "1.5rem" }}>
-              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.4rem" }}>Tools</p>
+              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.4rem" }}>{language === "en" ? "Tools" : "도구"}</p>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", color: "#f0f0f0" }}>{project.tools.join(", ")}</p>
             </div>
 
             {project.aiTools && project.aiTools.length > 0 && (
               <div style={{ marginBottom: "1.5rem" }}>
-                <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.4rem" }}>AI Tools</p>
+                <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.4rem" }}>{language === "en" ? "AI Tools" : "AI 도구"}</p>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", color: "#f0f0f0" }}>{project.aiTools.join(", ")}</p>
               </div>
             )}
@@ -248,7 +251,7 @@ export default function ProjectDetail() {
             <div style={{ height: 1, background: "rgba(255,255,255,0.08)", marginBottom: "1.5rem" }} />
 
             <div>
-              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.75rem" }}>About</p>
+              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.75rem" }}>{language === "en" ? "About" : "소개"}</p>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", color: "rgba(240,240,240,0.8)", lineHeight: 1.7 }}>{project.description}</p>
             </div>
           </div>
@@ -274,7 +277,7 @@ export default function ProjectDetail() {
                 color: "rgba(240,240,240,0.5)",
                 margin: 0,
               }}>
-                More in {project.category}
+                {language === "en" ? `More in ${project.category}` : `${project.category}의 다른 작업`}
               </h2>
 
               {totalPages > 1 && (

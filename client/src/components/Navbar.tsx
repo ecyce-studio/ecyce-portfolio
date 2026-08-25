@@ -2,16 +2,21 @@
 // Style: Dark Craft — transparent nav with green underline hover, sticky with blur on scroll
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-
-const navLinks = [
-  { href: "/work", label: "Work" },
-  { href: "/about", label: "About" },
-  // { href: "/contact", label: "Contact" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
+  const { language, setLanguage } = useLanguage();
+  const navLinks = language === "en"
+    ? [
+        { href: "/work", label: "Work" },
+        { href: "/about", label: "About" },
+      ]
+    : [
+        { href: "/work", label: "작업" },
+        { href: "/about", label: "소개" },
+      ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -90,6 +95,45 @@ export default function Navbar() {
             </Link>
           );
         })}
+        <div
+          role="group"
+          aria-label="Language selection"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            border: "1px solid rgba(255,255,255,0.16)",
+            borderRadius: 999,
+            padding: 3,
+            marginLeft: "0.25rem",
+          }}
+        >
+          {(["ko", "en"] as const).map((option) => {
+            const isSelected = language === option;
+            return (
+              <button
+                key={option}
+                type="button"
+                onClick={() => setLanguage(option)}
+                aria-pressed={isSelected}
+                style={{
+                  border: 0,
+                  borderRadius: 999,
+                  background: isSelected ? "#22c55e" : "transparent",
+                  color: isSelected ? "#0a0a0a" : "rgba(240,240,240,0.55)",
+                  cursor: isSelected ? "default" : "pointer",
+                  fontFamily: "'Space Mono', monospace",
+                  fontSize: "0.55rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.08em",
+                  padding: "0.4rem 0.55rem",
+                  transition: "background 150ms, color 150ms",
+                }}
+              >
+                {option === "ko" ? "KOR" : "ENG"}
+              </button>
+            );
+          })}
+        </div>
       </nav>
     </header>
   );

@@ -3,9 +3,10 @@
 // Layout: Large italic client name header, 3-column video grid, hover overlay with play icon
 import { useEffect, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
-import { clientGroups } from "@/lib/projects";
+import { getLocalizedClientGroups } from "@/lib/projects";
 import { Link } from "wouter";
 import { Play } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ProjectCardData {
   slug: string;
@@ -105,6 +106,8 @@ function ProjectCard({ project }: { project: ProjectCardData }) {
 
 export default function Work() {
   const [visible, setVisible] = useState(false);
+  const { language } = useLanguage();
+  const clientGroups = getLocalizedClientGroups(language);
   useEffect(() => { setVisible(true); }, []);
 
   return (
@@ -131,7 +134,7 @@ export default function Work() {
           textTransform: "uppercase",
           marginBottom: "0.75rem",
         }}>
-          Portfolio
+          {language === "en" ? "Portfolio" : "포트폴리오"}
         </p>
         <h1 style={{
           fontFamily: "'Space Grotesk', sans-serif",
@@ -141,7 +144,7 @@ export default function Work() {
           margin: 0,
           lineHeight: 1.1,
         }}>
-          Video Editing Work
+          {language === "en" ? "Video Editing Work" : "영상 편집 작업"}
         </h1>
       </div>
 

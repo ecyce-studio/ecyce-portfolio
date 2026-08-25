@@ -3,11 +3,12 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import MosaicHero from "@/components/MosaicHero";
-import { projects } from "@/lib/projects";
+import { getLocalizedProjects, type Project } from "@/lib/projects";
 import { Link } from "wouter";
 import { Play, ArrowRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-function FeaturedCard({ project }: { project: typeof projects[0] }) {
+function FeaturedCard({ project }: { project: Project }) {
   const [hovered, setHovered] = useState(false);
   return (
     <Link href={`/work/${project.slug}`}>
@@ -90,8 +91,10 @@ function FeaturedCard({ project }: { project: typeof projects[0] }) {
 }
 
 export default function Home() {
-  const featured = projects.filter(p => p.featured);
-  const rest = projects.filter(p => !p.featured);
+  const { language } = useLanguage();
+  const localizedProjects = getLocalizedProjects(language);
+  const featured = localizedProjects.filter(p => p.featured);
+  const rest = localizedProjects.filter(p => !p.featured);
   const displayed = [...featured, ...rest].slice(0, 6);
 
   return (
@@ -117,7 +120,7 @@ export default function Home() {
                 color: "#22c55e",
                 textTransform: "uppercase",
                 marginBottom: "0.5rem",
-              }}>Work</p>
+              }}>{language === "en" ? "Work" : "작업"}</p>
               <h2 style={{
                 fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "clamp(1.4rem, 3vw, 2rem)",
@@ -125,7 +128,7 @@ export default function Home() {
                 color: "#f0f0f0",
                 margin: 0,
               }}>
-                Recent Projects
+                {language === "en" ? "Recent Projects" : "최근 프로젝트"}
               </h2>
             </div>
             <Link href="/work">
@@ -142,7 +145,7 @@ export default function Home() {
                 textDecoration: "none",
                 transition: "gap 150ms",
               }}>
-                View All <ArrowRight size={14} />
+                {language === "en" ? "View All" : "전체 보기"} <ArrowRight size={14} />
               </span>
             </Link>
           </div>
@@ -166,7 +169,7 @@ export default function Home() {
       }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
           <div>
-            <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.18em", color: "#22c55e", textTransform: "uppercase", marginBottom: "1rem" }}>About</p>
+            <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.18em", color: "#22c55e", textTransform: "uppercase", marginBottom: "1rem" }}>{language === "en" ? "About" : "소개"}</p>
             <h2 style={{
               fontFamily: "'Space Grotesk', sans-serif",
               fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)",
@@ -175,8 +178,17 @@ export default function Home() {
               lineHeight: 1.4,
               marginBottom: "1.25rem",
             }}>
-              무한한 상상으로부터 <br />
-              <span style={{ color: "#22c55e" }}>영상을 그려냅니다.</span>
+              {language === "en" ? (
+                <>
+                  From boundless imagination <br />
+                  <span style={{ color: "#22c55e" }}>to moving images.</span>
+                </>
+              ) : (
+                <>
+                  무한한 상상으로부터 <br />
+                  <span style={{ color: "#22c55e" }}>영상을 그려냅니다.</span>
+                </>
+              )}
             </h2>
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -185,7 +197,9 @@ export default function Home() {
               lineHeight: 1.75,
               marginBottom: "2rem",
             }}>
-              저는 Ecyce 입니다. - 전 게임 개발자이자 현 영상 제작자로 활동하고 있습니다. 영상 제작을 배운 지는 반년 남짓이지만, 무언가를 상상하고 완성하는 감각은 그보다 훨씬 오래되었습니다. 유쾌함, 트렌디한 감각을 담아 영상을 만듭니다.
+              {language === "en"
+                ? "I’m Ecyce—a former game developer and current video creator. I bring a playful, trend-aware perspective to every project, turning imagination into clear, memorable visuals."
+                : "저는 Ecyce 입니다. - 전 게임 개발자이자 현 영상 제작자로 활동하고 있습니다. 영상 제작을 배운 지는 반년 남짓이지만, 무언가를 상상하고 완성하는 감각은 그보다 훨씬 오래되었습니다. 유쾌함, 트렌디한 감각을 담아 영상을 만듭니다."}
             </p>
             <Link href="/about">
               <span style={{
@@ -207,7 +221,7 @@ export default function Home() {
                 onMouseEnter={e => (e.currentTarget.style.background = "#16a34a")}
                 onMouseLeave={e => (e.currentTarget.style.background = "#22c55e")}
               >
-                Learn More <ArrowRight size={13} />
+                {language === "en" ? "Learn More" : "자세히 보기"} <ArrowRight size={13} />
               </span>
             </Link>
           </div>
