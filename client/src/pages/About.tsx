@@ -188,10 +188,45 @@ export default function About() {
                 </div>
               ))}
             </div>
+
+            {/* Game Dev Portfolio link */}
+            <div style={{ marginTop: "3rem" }}>
+              <a
+                href="https://drive.google.com/file/d/100uVBvxhgSYgfSnQv7UJv9P-0Ya9H_CI/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.6rem",
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: "0.7rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "#22c55e",
+                  background: "transparent",
+                  border: "1px solid #22c55e",
+                  padding: "0.75rem 1.5rem",
+                  textDecoration: "none",
+                  transition: "background 150ms, color 150ms",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.background = "#22c55e";
+                  e.currentTarget.style.color = "#0a0a0a";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "#22c55e";
+                }}
+              >
+                Pre) Game Developer Portfolio →
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
