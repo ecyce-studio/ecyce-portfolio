@@ -3,12 +3,15 @@
 import { useState } from "react";
 import { useParams, Link } from "wouter";
 import Navbar from "@/components/Navbar";
-import { getProjectBySlug, projects } from "@/lib/projects";
+import { getLocalizedProjectBySlug, getLocalizedProjects } from "@/lib/projects";
 import { ArrowLeft, Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ProjectDetail() {
   const params = useParams<{ slug: string }>();
-  const project = getProjectBySlug(params.slug);
+  const { language } = useLanguage();
+  const project = getLocalizedProjectBySlug(params.slug, language);
+  const localizedProjects = getLocalizedProjects(language);
 
   if (!project) {
     return (
@@ -16,7 +19,7 @@ export default function ProjectDetail() {
         <Navbar />
         <div style={{ textAlign: "center" }}>
           <p style={{ color: "#22c55e", fontFamily: "'Space Mono', monospace", fontSize: "0.7rem", letterSpacing: "0.15em" }}>404</p>
-          <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", color: "#f0f0f0", fontSize: "2rem", marginTop: "1rem" }}>Project not found</h1>
+          <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", color: "#f0f0f0", fontSize: "2rem", marginTop: "1rem" }}>{language === "en" ? "Project not found" : "프로젝트를 찾을 수 없습니다"}</h1>
           <Link href="/work">
             <span style={{ color: "#22c55e", fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>← Back to Work</span>
           </Link>
@@ -26,7 +29,7 @@ export default function ProjectDetail() {
   }
 
   // Related projects (same category, different slug) — full list, paged
-  const related = projects.filter(p => p.category === project.category && p.slug !== project.slug);
+  const related = localizedProjects.filter(p => p.category === project.category && p.slug !== project.slug);
   const [page, setPage] = useState(0);
   const itemsPerPage = 3;
   const totalPages = Math.ceil(related.length / itemsPerPage);

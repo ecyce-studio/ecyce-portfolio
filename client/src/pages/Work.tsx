@@ -3,9 +3,10 @@
 // Layout: Large italic client name header, 3-column video grid, hover overlay with play icon
 import { useEffect, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
-import { clientGroups } from "@/lib/projects";
+import { getLocalizedClientGroups } from "@/lib/projects";
 import { Link } from "wouter";
 import { Play } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ProjectCardData {
   slug: string;
@@ -105,6 +106,8 @@ function ProjectCard({ project }: { project: ProjectCardData }) {
 
 export default function Work() {
   const [visible, setVisible] = useState(false);
+  const { language } = useLanguage();
+  const clientGroups = getLocalizedClientGroups(language);
   useEffect(() => { setVisible(true); }, []);
 
   return (

@@ -2,6 +2,7 @@
 // Style: Dark Craft — asymmetric layout, green accent details, geometric band accents
 import Navbar from "@/components/Navbar";
 import { Link } from "wouter";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const skills = [
   { category: "Editing", items: ["Adobe Premiere Pro", "After Effects", "Capcut"] },
@@ -22,6 +23,8 @@ function GeoBand() {
 }
 
 export default function About() {
+  const { language } = useLanguage();
+
   return (
     <div style={{ background: "#0a0a0a", minHeight: "100vh" }}>
       <Navbar />
@@ -63,8 +66,17 @@ export default function About() {
             lineHeight: 1.05,
             margin: 0,
           }}>
-            무한한 상상으로부터<br />
-            <span style={{ color: "#22c55e" }}> 영상을 그려냅니다.<br /></span>
+            {language === "en" ? (
+              <>
+                From boundless imagination<br />
+                <span style={{ color: "#22c55e" }}>to moving images.<br /></span>
+              </>
+            ) : (
+              <>
+                무한한 상상으로부터<br />
+                <span style={{ color: "#22c55e" }}> 영상을 그려냅니다.<br /></span>
+              </>
+            )}
           </h1>
         </div>
 
@@ -81,7 +93,9 @@ export default function About() {
               color: "rgba(240,240,240,0.8)",
               marginBottom: "1.5rem",
             }}>
-              저는 Ecyce - 박자감과 이야기를 중심으로 영상을 만드는 AI Creator입니다.
+              {language === "en"
+                ? "I’m Ecyce, an AI creator who builds videos around rhythm and story."
+                : "저는 Ecyce - 박자감과 이야기를 중심으로 영상을 만드는 AI Creator입니다."}
             </p>
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -90,19 +104,31 @@ export default function About() {
               color: "rgba(240,240,240,0.8)",
               marginBottom: "1.5rem",
             }}>
-              영상을 제작할 때엔 저만의 유쾌하고 트렌디한 감각을 담아 만듭니다.
-              학창 시절부터 핀터레스트를 탐색하며 트렌드를 쫓고, 코미디를 즐겨 보는 것이 취미였습니다.
-              그렇게 쌓인 취향은 지금 제가 만드는 영상 곳곳에 저만의 포인트로
-              녹아 있습니다.
-              <br /><br />
-              상상을 현실로 옮기는 일을 체계화된 방식으로 진행합니다. 게임 개발자로 일하던 시절부터
-              Notion, Figjam 등으로 콘텐츠를 계획적으로 설계해 제작해왔고,
-              이 습관은 지금도 이어져 영상 프로젝트를 더 정확하고 수월하게
-              완성하는 힘이 되고 있습니다.
-              <br /><br />
-              또한 인디 게임 사업에 도전하며 익힌 마케팅과 사업 지식은, 영상을
-              만들기 전 타겟층을 명확히 하는 눈으로 이어졌습니다. 누가 볼지를
-              먼저 그리고 나서 영상을 제작해, 보는 사람의 흥미를 파고들 수 있도록 노력하고 있습니다.
+{language === "en" ? (
+                <>
+                  I bring a playful, trend-aware point of view to every video. Since my school days, I’ve explored visual culture through Pinterest and comedy; those accumulated instincts now become distinctive details in my work.
+                  <br /><br />
+                  I turn imagination into reality through a structured process. My years in game development taught me to plan content methodically with tools such as Notion and FigJam, a practice that still helps me make each video project more precise and efficient.
+                  <br /><br />
+                  My experience building an indie-game business also sharpened my understanding of marketing and audiences. I begin by identifying who a video is for, then create work designed to earn and hold their attention.
+                </>
+              ) : (
+                <>
+                  영상을 제작할 때엔 저만의 유쾌하고 트렌디한 감각을 담아 만듭니다.
+                  학창 시절부터 핀터레스트를 탐색하며 트렌드를 쫓고, 코미디를 즐겨 보는 것이 취미였습니다.
+                  그렇게 쌓인 취향은 지금 제가 만드는 영상 곳곳에 저만의 포인트로
+                  녹아 있습니다.
+                  <br /><br />
+                  상상을 현실로 옮기는 일을 체계화된 방식으로 진행합니다. 게임 개발자로 일하던 시절부터
+                  Notion, Figjam 등으로 콘텐츠를 계획적으로 설계해 제작해왔고,
+                  이 습관은 지금도 이어져 영상 프로젝트를 더 정확하고 수월하게
+                  완성하는 힘이 되고 있습니다.
+                  <br /><br />
+                  또한 인디 게임 사업에 도전하며 익힌 마케팅과 사업 지식은, 영상을
+                  만들기 전 타겟층을 명확히 하는 눈으로 이어졌습니다. 누가 볼지를
+                  먼저 그리고 나서 영상을 제작해, 보는 사람의 흥미를 파고들 수 있도록 노력하고 있습니다.
+                </>
+              )}
             </p>
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -110,7 +136,7 @@ export default function About() {
               lineHeight: 1.8,
               color: "rgba(240,240,240,0.8)",
             }}>
-              함께 이야기를 만들어 갈 파트너를 찾고 있습니다. <br/><br/>
+              {language === "en" ? "I’m looking for collaborators to build meaningful stories with." : "함께 이야기를 만들어 갈 파트너를 찾고 있습니다."} <br/><br/>
             </p>
 
             <p style={{

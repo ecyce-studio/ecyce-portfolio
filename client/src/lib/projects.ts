@@ -277,3 +277,91 @@ export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find(p => p.slug === slug);
 }
 
+
+export interface ProjectTranslation {
+  title: string;
+  description: string;
+  client?: string;
+  category?: string;
+  role?: string;
+  tags?: string[];
+  content?: ContentBlock[];
+}
+
+const englishProjectTranslations: Record<string, ProjectTranslation> = {
+  woongjin_saengcha_contest: {
+    title: "A First Meeting Is So Awkward—Unless There’s Saengcha?",
+    description:
+      "A beverage commercial about how an awkward first meeting can become a memorable moment when shared with Saengcha.",
+    content: [
+      { type: "heading", text: "PROCESS" },
+      { type: "text", text: "Planning > AI image creation > AI video creation (Seedance 2.0, Kling O3 Pro) > Video editing" },
+      { type: "heading", text: "AI IMAGE" },
+      { type: "text", text: "[Character Sheet] Full-body image generation (Seedream 4.5) > Sheet image refinement (NanoBanana)" },
+      { type: "image", src: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd2ol7oe51mr4n9.cloudfront.net%2Fuser_3CbkxukKmtCGExZ5uktUQ3QYa2z%2Fbdc3ebb1-e20c-407a-b679-5cb2a1010a2c.png&w=1920&q=85", caption: "Character 1 — Yuna" },
+      { type: "image", src: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd2ol7oe51mr4n9.cloudfront.net%2Fuser_3CbkxukKmtCGExZ5uktUQ3QYa2z%2Ff03d975f-9a19-465f-8862-b8e8a4177a29.png&w=1920&q=85", caption: "Character 2 — Hyojeong" },
+      { type: "text", text: "[Background] Reference-based background image generation (Seedream)" },
+      { type: "image", src: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_3CbkxukKmtCGExZ5uktUQ3QYa2z%2Fhf_20260804_013401_c9b2ad14-30d2-46ff-b0a8-c4e5bcef8861.png&w=1920&q=85" },
+      { type: "image", src: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_3CbkxukKmtCGExZ5uktUQ3QYa2z%2Fhf_20260805_014854_904ddd37-4058-4074-b02e-2d43b18ca8a2_min.webp&w=1920&q=85" },
+      { type: "text", text: "[Prop] Regenerated a more dimensional beverage image (GPT)" },
+      { type: "image", src: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd2ol7oe51mr4n9.cloudfront.net%2Fuser_3CbkxukKmtCGExZ5uktUQ3QYa2z%2F5feb962b-2996-4fec-aac2-83e7bd6d6ca4.png&w=1920&q=85" },
+    ],
+  },
+  beyond_sound: {
+    title: "Beyond Sound",
+    description:
+      "An AI visual-art film expressing how a voice becomes singular when the speaker’s identity transforms it from one sound among many into an unmistakable presence. Submitted to the Youshoppe contest.",
+  },
+  guirang_workshop_promo_1: {
+    title: "Guirang Workshop Promotional Video, Episode 1",
+    description:
+      "The first entry in a playful, character-driven promotional series created for a teammate’s workshop as part of an AI-video production team project.",
+    role: "PM, Planning, AI Creator",
+  },
+  guirang_workshop_promo_2: {
+    title: "Guirang Workshop Promotional Video, Episode 2",
+    description:
+      "The second entry in a playful, character-driven promotional series created for a teammate’s workshop as part of an AI-video production team project.",
+    role: "PM, Planning, AI Creator",
+  },
+  olidia_glowing_skin: {
+    title: "Olidia: In Search of Radiant Skin",
+    description:
+      "A short-form story about an office worker worried about her skin, who discovers a colleague’s remarkable transformation and sets out to find the secret behind it. Submitted to the Olidia AI 29-Role Shorts King contest.",
+  },
+  billlie_work_fmv: {
+    title: "Billlie | An FMV Made for ‘Work’ (No Official M/V)",
+    description:
+      "A fan-made music video built around the idea that Billlie’s ‘Work’ instantly turns the world into a fashion show. The edit follows the beat with motion-graphic accents throughout.",
+    role: "AI Creator, Motion Graphics",
+  },
+  "54321_amazing_digital_circus_fmv": {
+    title: "54321 | The Amazing Digital Circus [FMV]",
+    description:
+      "A fan music video for The Amazing Digital Circus, directed around the characters in time with a male-female duet and its rhythm.",
+    role: "Editor, Rotoscoping",
+  },
+};
+
+export function localizeProject(project: Project, language: "ko" | "en"): Project {
+  if (language === "ko") return project;
+
+  const translation = englishProjectTranslations[project.slug];
+  return translation ? { ...project, ...translation } : project;
+}
+
+export function getLocalizedProjects(language: "ko" | "en"): Project[] {
+  return projects.map((project) => localizeProject(project, language));
+}
+
+export function getLocalizedClientGroups(language: "ko" | "en"): ClientGroup[] {
+  return clientGroups.map((group) => ({
+    ...group,
+    projects: group.projects.map((project) => localizeProject(project, language)),
+  }));
+}
+
+export function getLocalizedProjectBySlug(slug: string, language: "ko" | "en"): Project | undefined {
+  const project = getProjectBySlug(slug);
+  return project ? localizeProject(project, language) : undefined;
+}

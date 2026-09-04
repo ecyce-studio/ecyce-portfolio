@@ -3,11 +3,12 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import MosaicHero from "@/components/MosaicHero";
-import { projects } from "@/lib/projects";
+import { getLocalizedProjects, type Project } from "@/lib/projects";
 import { Link } from "wouter";
 import { Play, ArrowRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-function FeaturedCard({ project }: { project: typeof projects[0] }) {
+function FeaturedCard({ project }: { project: Project }) {
   const [hovered, setHovered] = useState(false);
   return (
     <Link href={`/work/${project.slug}`}>
@@ -90,8 +91,10 @@ function FeaturedCard({ project }: { project: typeof projects[0] }) {
 }
 
 export default function Home() {
-  const featured = projects.filter(p => p.featured);
-  const rest = projects.filter(p => !p.featured);
+  const { language } = useLanguage();
+  const localizedProjects = getLocalizedProjects(language);
+  const featured = localizedProjects.filter(p => p.featured);
+  const rest = localizedProjects.filter(p => !p.featured);
   const displayed = [...featured, ...rest].slice(0, 6);
 
   return (
@@ -175,8 +178,17 @@ export default function Home() {
               lineHeight: 1.4,
               marginBottom: "1.25rem",
             }}>
-              무한한 상상으로부터 <br />
-              <span style={{ color: "#22c55e" }}>영상을 그려냅니다.</span>
+              {language === "en" ? (
+                <>
+                  From boundless imagination <br />
+                  <span style={{ color: "#22c55e" }}>to moving images.</span>
+                </>
+              ) : (
+                <>
+                  무한한 상상으로부터 <br />
+                  <span style={{ color: "#22c55e" }}>영상을 그려냅니다.</span>
+                </>
+              )}
             </h2>
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -185,7 +197,9 @@ export default function Home() {
               lineHeight: 1.75,
               marginBottom: "2rem",
             }}>
-              저는 Ecyce 입니다. - 전 게임 개발자이자 현 영상 제작자로 활동하고 있습니다. 영상 제작을 배운 지는 반년 남짓이지만, 무언가를 상상하고 완성하는 감각은 그보다 훨씬 오래되었습니다. 유쾌함, 트렌디한 감각을 담아 영상을 만듭니다.
+              {language === "en"
+                ? "I’m Ecyce—a former game developer and current video creator. I bring a playful, trend-aware perspective to every project, turning imagination into clear, memorable visuals."
+                : "저는 Ecyce 입니다. - 전 게임 개발자이자 현 영상 제작자로 활동하고 있습니다. 영상 제작을 배운 지는 반년 남짓이지만, 무언가를 상상하고 완성하는 감각은 그보다 훨씬 오래되었습니다. 유쾌함, 트렌디한 감각을 담아 영상을 만듭니다."}
             </p>
             <Link href="/about">
               <span style={{
