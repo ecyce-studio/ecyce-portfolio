@@ -1,12 +1,13 @@
 // Ecyce Portfolio — About Page
 // Style: Dark Craft — asymmetric layout, green accent details, geometric band accents
 import Navbar from "@/components/Navbar";
-import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { CONTACT_EMAIL, hideContact } from "@/lib/siteMode";
 
 const skills = [
-  { category: "Editing", items: ["Adobe Premiere Pro", "After Effects", "Capcut"] },
-  { category: "AI Tools", items: ["Google Flow", "MidJourney", "Higgsfield"] },
+  { category: "AI Video", items: ["Seedance", "Kling", "Google Flow", "Higgsfield"] },
+  { category: "AI Image", items: ["Seedream", "NanoBanana", "MidJourney", "GPT Image"] },
+  { category: "Editing", items: ["Adobe Premiere Pro", "After Effects", "CapCut"] },
   { category: "Image", items: ["Adobe Photoshop", "Procreate", "Clip Studio"] },
   { category: "PM", items: ["Notion", "Figma", "Jira"] },
 ];
@@ -45,7 +46,7 @@ export default function About() {
         </div>
       </div>
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "4rem 2rem 6rem" }}>
+      <div className="page-pad" style={{ maxWidth: 1200, margin: "0 auto", padding: "4rem 2rem 6rem" }}>
         {/* Header */}
         <div style={{ marginBottom: "5rem" }}>
           <p style={{
@@ -83,7 +84,7 @@ export default function About() {
         <GeoBand />
 
         {/* Bio + Skills grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "start" }}>
+        <div className="grid-2" style={{ gap: "5rem", alignItems: "start" }}>
           {/* Bio */}
           <div>
             <p style={{
@@ -94,8 +95,8 @@ export default function About() {
               marginBottom: "1.5rem",
             }}>
               {language === "en"
-                ? "I’m Ecyce, an AI creator who builds videos around rhythm and story."
-                : "저는 Ecyce - 박자감과 이야기를 중심으로 영상을 만드는 AI Creator입니다."}
+                ? "I’m Ecyce, an AI Video Ad Creator — a former game developer who builds short-form ads around rhythm, story and a clear production pipeline."
+                : "저는 Ecyce - 박자감과 이야기, 체계적인 제작 프로세스로 광고 영상을 만드는 게임 개발자 출신 AI Video Ad Creator입니다."}
             </p>
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -139,14 +140,16 @@ export default function About() {
               {language === "en" ? "I’m looking for collaborators to build meaningful stories with." : "함께 이야기를 만들어 갈 파트너를 찾고 있습니다."} <br/><br/>
             </p>
 
-            <p style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "1.05rem",
-              lineHeight: 1.8,
-              color: "#22c55e",
-            }}>
-              [Contact] <b>ecyce.studio@gmail.com</b>
-            </p>
+            {!hideContact && (
+              <p style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "1.05rem",
+                lineHeight: 1.8,
+                color: "#22c55e",
+              }}>
+                [Contact] <b>{CONTACT_EMAIL}</b>
+              </p>
+            )}
 
             {/*<div style={{ marginTop: "2.5rem" }}>*/}
             {/*  <Link href="/contact">*/}

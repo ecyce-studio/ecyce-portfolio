@@ -1,101 +1,22 @@
 // Ecyce Portfolio — Home Page
 // Style: Dark Craft — mosaic hero + selected work preview + footer
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import MosaicHero from "@/components/MosaicHero";
-import { getLocalizedProjects, type Project } from "@/lib/projects";
+import ProjectCard from "@/components/ProjectCard";
+import { getLocalizedProjects, type WorkSection } from "@/lib/projects";
 import { Link } from "wouter";
-import { Play, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-function FeaturedCard({ project }: { project: Project }) {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <Link href={`/work/${project.slug}`}>
-      <div
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        style={{ cursor: "pointer" }}
-      >
-        <div style={{
-          position: "relative",
-          aspectRatio: "16/9",
-          background: "#111",
-          overflow: "hidden",
-        }}>
-          <img
-            src={project.thumbnail}
-            alt={project.title}
-            loading="lazy"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              display: "block",
-              transform: hovered ? "scale(1.04)" : "scale(1)",
-              transition: "transform 350ms cubic-bezier(0.23,1,0.32,1)",
-            }}
-          />
-          <div style={{
-            position: "absolute",
-            inset: 0,
-            background: hovered ? "rgba(10,10,10,0.6)" : "rgba(10,10,10,0)",
-            transition: "background 250ms cubic-bezier(0.23,1,0.32,1)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}>
-            <div style={{
-              opacity: hovered ? 1 : 0,
-              transform: hovered ? "scale(1)" : "scale(0.8)",
-              transition: "opacity 250ms, transform 250ms cubic-bezier(0.23,1,0.32,1)",
-              background: "rgba(34,197,94,0.12)",
-              border: "2px solid #22c55e",
-              borderRadius: "50%",
-              width: 52,
-              height: 52,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}>
-              <Play size={20} color="#22c55e" fill="#22c55e" style={{ marginLeft: 3 }} />
-            </div>
-          </div>
-        </div>
-        <div style={{ padding: "0.7rem 0 0" }}>
-          <p style={{
-            fontFamily: "'Space Mono', monospace",
-            fontSize: "0.58rem",
-            letterSpacing: "0.12em",
-            color: "#22c55e",
-            textTransform: "uppercase",
-            marginBottom: "0.3rem",
-          }}>
-            {project.category} // {project.year}
-          </p>
-          <h4 style={{
-            fontFamily: "'Space Grotesk', sans-serif",
-            fontSize: "0.9rem",
-            fontWeight: 600,
-            color: hovered ? "#22c55e" : "#f0f0f0",
-            margin: 0,
-            lineHeight: 1.3,
-            transition: "color 200ms",
-          }}>
-            {project.title.toUpperCase()}
-          </h4>
-        </div>
-      </div>
-    </Link>
-  );
-}
+// 광고 → 필름 순으로 노출, 팬 작업은 홈에서 제외
+const homeSectionOrder: WorkSection[] = ["commercial", "film"];
 
 export default function Home() {
   const { language } = useLanguage();
   const localizedProjects = getLocalizedProjects(language);
-  const featured = localizedProjects.filter(p => p.featured);
-  const rest = localizedProjects.filter(p => !p.featured);
-  const displayed = [...featured, ...rest].slice(0, 6);
+  const displayed = homeSectionOrder
+    .flatMap(section => localizedProjects.filter(p => p.section === section))
+    .slice(0, 6);
 
   return (
     <div style={{ background: "#0a0a0a", minHeight: "100vh" }}>
@@ -103,13 +24,15 @@ export default function Home() {
       <MosaicHero />
 
       {/* Selected Work section */}
-      <section style={{ padding: "5rem 2rem 4rem" }}>
+      <section className="page-pad" style={{ padding: "5rem 2rem 4rem" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           {/* Section header */}
           <div style={{
             display: "flex",
             alignItems: "baseline",
             justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "1rem",
             marginBottom: "3rem",
           }}>
             <div>
@@ -151,23 +74,19 @@ export default function Home() {
           </div>
 
           {/* 단일 그리드로 통합 — 3열 x 2줄 자동 정렬 */}
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "1.25rem",
-          }}>
-            {displayed.map(p => <FeaturedCard key={p.slug} project={p} />)}
+          <div className="grid-3" style={{ gap: "1.25rem" }}>
+            {displayed.map(p => <ProjectCard key={p.slug} project={p} />)}
           </div>
         </div>
       </section>
 
       {/* About teaser */}
-      <section style={{
+      <section className="page-pad" style={{
         borderTop: "1px solid rgba(255,255,255,0.07)",
         padding: "5rem 2rem",
         background: "#0d0d0d",
       }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
+        <div className="grid-2" style={{ maxWidth: 1200, margin: "0 auto", gap: "4rem", alignItems: "center" }}>
           <div>
             <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.18em", color: "#22c55e", textTransform: "uppercase", marginBottom: "1rem" }}>About</p>
             <h2 style={{
@@ -198,8 +117,8 @@ export default function Home() {
               marginBottom: "2rem",
             }}>
               {language === "en"
-                ? "I’m Ecyce—a former game developer and current video creator. I bring a playful, trend-aware perspective to every project, turning imagination into clear, memorable visuals."
-                : "저는 Ecyce 입니다. - 전 게임 개발자이자 현 영상 제작자로 활동하고 있습니다. 영상 제작을 배운 지는 반년 남짓이지만, 무언가를 상상하고 완성하는 감각은 그보다 훨씬 오래되었습니다. 유쾌함, 트렌디한 감각을 담아 영상을 만듭니다."}
+                ? "I’m Ecyce — a former game developer turned AI video ad creator. I run every project through a structured production pipeline, from planning and character sheets to AI generation and final edit, so brands get consistent, on-brief ads with a playful, trend-aware edge."
+                : "저는 Ecyce입니다. — 게임 개발자 출신의 AI 광고 영상 크리에이터입니다. 기획부터 캐릭터 시트, AI 생성, 최종 편집까지 체계적인 제작 프로세스로 진행해, 브리프에 맞는 일관된 광고 영상을 유쾌하고 트렌디한 감각으로 완성합니다."}
             </p>
             <Link href="/about">
               <span style={{

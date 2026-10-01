@@ -2,6 +2,7 @@
 // Style: Dark Craft — editor-voice copy, geometric accent, minimal form
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
+import { CONTACT_EMAIL, hideContact } from "@/lib/siteMode";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -176,7 +177,7 @@ export default function Contact() {
         <div style={{ marginTop: "4rem", paddingTop: "3rem", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
           <div style={{ display: "flex", gap: "3rem", flexWrap: "wrap" }}>
             {[
-              { label: "Email", value: "ecyce@email.com" },
+              ...(hideContact ? [] : [{ label: "Email", value: CONTACT_EMAIL }]),
               { label: "Based in", value: "Seoul, Korea" },
               { label: "Available for", value: "Remote Worldwide" },
             ].map(item => (

@@ -1,113 +1,16 @@
 // Ecyce Portfolio — Work Page
 // Style: Dark Craft — peterapple.com inspired client sections + 3-col thumbnail grid
 // Layout: Large italic client name header, 3-column video grid, hover overlay with play icon
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
-import { getLocalizedClientGroups } from "@/lib/projects";
-import { Link } from "wouter";
-import { Play } from "lucide-react";
+import ProjectCard, { UpcomingCard } from "@/components/ProjectCard";
+import { getLocalizedSections, showUpcomingSlots, upcomingSlots } from "@/lib/projects";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-interface ProjectCardData {
-  slug: string;
-  title: string;
-  category: string;
-  year: string;
-  thumbnail: string;
-  orientation?: "landscape" | "portrait"; // 추가: 영상 방향
-}
-
-function ProjectCard({ project }: { project: ProjectCardData }) {
-  const [hovered, setHovered] = useState(false);
-  const isPortrait = project.orientation === "portrait";
-
-  return (
-    <Link href={`/work/${project.slug}`}>
-      <div
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        style={{ display: "block", cursor: "pointer" }}
-      >
-        <div style={{
-          position: "relative",
-          aspectRatio: "16/9", // 카드 비율은 항상 통일
-          background: "#111",
-          overflow: "hidden",
-        }}>
-          <img
-            src={project.thumbnail}
-            alt={project.title}
-            loading="lazy"
-            style={{
-              width: "100%",
-              height: "100%",
-              // 세로 영상은 레터박스(contain), 가로 영상은 꽉 채움(cover)
-              objectFit: isPortrait ? "contain" : "cover",
-              display: "block",
-              transform: hovered ? "scale(1.04)" : "scale(1)",
-              transition: "transform 350ms cubic-bezier(0.23,1,0.32,1)",
-            }}
-          />
-          {/* Dark overlay */}
-          <div style={{
-            position: "absolute",
-            inset: 0,
-            background: hovered ? "rgba(10,10,10,0.6)" : "rgba(10,10,10,0)",
-            transition: "background 250ms cubic-bezier(0.23,1,0.32,1)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}>
-            <div style={{
-              opacity: hovered ? 1 : 0,
-              transform: hovered ? "scale(1)" : "scale(0.8)",
-              transition: "opacity 250ms, transform 250ms cubic-bezier(0.23,1,0.32,1)",
-              background: "rgba(34,197,94,0.15)",
-              border: "2px solid #22c55e",
-              borderRadius: "50%",
-              width: 52,
-              height: 52,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}>
-              <Play size={20} color="#22c55e" fill="#22c55e" style={{ marginLeft: 3 }} />
-            </div>
-          </div>
-        </div>
-        <div style={{ padding: "0.65rem 0 0" }}>
-          <p style={{
-            fontFamily: "'Space Mono', monospace",
-            fontSize: "0.58rem",
-            letterSpacing: "0.12em",
-            color: "#22c55e",
-            textTransform: "uppercase",
-            marginBottom: "0.3rem",
-          }}>
-            {project.category} // {project.year}
-          </p>
-          <h3 style={{
-            fontFamily: "'Space Grotesk', sans-serif",
-            fontSize: "0.85rem",
-            fontWeight: 600,
-            color: hovered ? "#22c55e" : "#f0f0f0",
-            margin: 0,
-            lineHeight: 1.3,
-            letterSpacing: "0.02em",
-            transition: "color 200ms",
-          }}>
-            {project.title.toUpperCase()}
-          </h3>
-        </div>
-      </div>
-    </Link>
-  );
-}
 
 export default function Work() {
   const [visible, setVisible] = useState(false);
   const { language } = useLanguage();
-  const clientGroups = getLocalizedClientGroups(language);
+  const sections = getLocalizedSections(language);
   useEffect(() => { setVisible(true); }, []);
 
   return (
@@ -115,7 +18,7 @@ export default function Work() {
       <Navbar />
 
       {/* Page header */}
-      <div style={{
+      <div className="page-pad" style={{
         paddingTop: "120px",
         paddingBottom: "2.5rem",
         paddingLeft: "2rem",
@@ -144,7 +47,7 @@ export default function Work() {
           margin: 0,
           lineHeight: 1.1,
         }}>
-          Video Editing Work
+          AI Video Ad Work
         </h1>
       </div>
 
@@ -152,9 +55,9 @@ export default function Work() {
       <div style={{ height: 1, background: "rgba(255,255,255,0.07)", maxWidth: 1200, margin: "0 auto 0", marginLeft: "2rem", marginRight: "2rem" }} />
 
       {/* Client groups */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 2rem 6rem" }}>
-        {clientGroups.map((group, gi) => (
-          <div key={group.name} style={{ paddingTop: "4rem", paddingBottom: "1rem" }}>
+      <div className="page-pad" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 2rem 6rem" }}>
+        {sections.map((group, gi) => (
+          <div key={group.key} style={{ paddingTop: "4rem", paddingBottom: "1rem" }}>
             {/* Separator between groups */}
             {gi > 0 && <div style={{ height: 1, background: "rgba(255,255,255,0.07)", marginBottom: "4rem" }} />}
 
@@ -165,20 +68,29 @@ export default function Work() {
               fontStyle: "italic",
               fontWeight: 700,
               color: "#f0f0f0",
-              marginBottom: "2rem",
+              marginBottom: group.note ? "0.75rem" : "2rem",
               letterSpacing: "0.01em",
             }}>
               {group.name.toUpperCase()}
             </h2>
+            {group.note && (
+              <p style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "0.85rem",
+                color: "rgba(240,240,240,0.45)",
+                marginBottom: "2rem",
+              }}>
+                {group.note}
+              </p>
+            )}
 
             {/* 3-column grid */}
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "1.25rem",
-            }}>
+            <div className="grid-3" style={{ gap: "1.25rem" }}>
               {group.projects.map(project => (
                 <ProjectCard key={project.slug} project={project} />
+              ))}
+              {showUpcomingSlots && group.key === "commercial" && upcomingSlots.map(slot => (
+                <UpcomingCard key={slot.key} slot={slot} language={language} />
               ))}
             </div>
           </div>

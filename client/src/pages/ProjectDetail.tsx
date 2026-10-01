@@ -1,9 +1,10 @@
 // Ecyce Portfolio — Project Detail Page
 // Style: Dark Craft — left video embed, right project info
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "wouter";
 import Navbar from "@/components/Navbar";
-import { getLocalizedProjectBySlug, getLocalizedProjects } from "@/lib/projects";
+import { WorkTypeBadge } from "@/components/ProjectCard";
+import { formatDuration, getLocalizedProjectBySlug, getLocalizedProjects } from "@/lib/projects";
 import { ArrowLeft, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -12,6 +13,8 @@ export default function ProjectDetail() {
   const { language } = useLanguage();
   const project = getLocalizedProjectBySlug(params.slug, language);
   const localizedProjects = getLocalizedProjects(language);
+  const [page, setPage] = useState(0);
+  useEffect(() => setPage(0), [params.slug]);
 
   if (!project) {
     return (
@@ -28,9 +31,21 @@ export default function ProjectDetail() {
     );
   }
 
-  // Related projects (same category, different slug) — full list, paged
-  const related = localizedProjects.filter(p => p.category === project.category && p.slug !== project.slug);
-  const [page, setPage] = useState(0);
+  // Related projects (same section, different slug) — full list, paged
+  const related = localizedProjects.filter(p => p.section === project.section && p.slug !== project.slug);
+  const isPortrait = project.format === "9:16";
+  const metaItems = [
+    { label: "Format", value: project.format },
+    { label: "Length", value: formatDuration(project.duration) },
+    { label: "Platform", value: project.platforms.join(" · ") },
+  ];
+  const briefItems = project.brief
+    ? [
+        { label: "Hook", value: project.brief.hook },
+        { label: "Target audience", value: project.brief.audience },
+        { label: "Goal", value: project.brief.goal },
+      ]
+    : [];
   const itemsPerPage = 3;
   const totalPages = Math.ceil(related.length / itemsPerPage);
   const paged = related.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage);
@@ -42,7 +57,7 @@ export default function ProjectDetail() {
     <div style={{ background: "#0a0a0a", minHeight: "100vh" }}>
       <Navbar />
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "100px 2rem 6rem" }}>
+      <div className="page-pad" style={{ maxWidth: 1200, margin: "0 auto", padding: "100px 2rem 6rem" }}>
         {/* Back link */}
         <Link href="/work">
           <span style={{
@@ -69,9 +84,7 @@ export default function ProjectDetail() {
         </Link>
 
         {/* Main content: video + info */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 380px",
+        <div className="detail-grid" style={{
           gap: "3rem",
           alignItems: "start",
         }}>
@@ -79,8 +92,10 @@ export default function ProjectDetail() {
           <div>
             <div style={{
               position: "relative",
-              paddingBottom: "56.25%",
-              height: 0,
+              aspectRatio: isPortrait ? "9/16" : "16/9",
+              width: "100%",
+              maxWidth: isPortrait ? 400 : undefined,
+              margin: isPortrait ? "0 auto" : undefined,
               background: "#111",
               overflow: "hidden",
             }}>
@@ -212,6 +227,9 @@ export default function ProjectDetail() {
             }}>
               {project.category} // {project.year}
             </p>
+            <div style={{ marginBottom: "0.9rem" }}>
+              <WorkTypeBadge project={project} />
+            </div>
             <h1 style={{
               fontFamily: "'Space Grotesk', sans-serif",
               fontSize: "clamp(1.4rem, 2.5vw, 2rem)",
@@ -228,6 +246,22 @@ export default function ProjectDetail() {
             <div style={{ marginBottom: "1.5rem" }}>
               <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.4rem" }}>Client</p>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", color: "#f0f0f0" }}>{project.client}</p>
+              {project.brandDisclaimer && (
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8rem", color: "rgba(240,240,240,0.5)", lineHeight: 1.6, marginTop: "0.5rem" }}>
+                  {language === "en"
+                    ? "Independent work made for a public contest — not commissioned by or affiliated with the brand."
+                    : "브랜드로부터 의뢰받은 작업이 아닌, 공모전 출품을 위해 제작한 개인 작업입니다."}
+                </p>
+              )}
+            </div>
+
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem", marginBottom: "1.5rem" }}>
+              {metaItems.map(item => (
+                <div key={item.label}>
+                  <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.4rem" }}>{item.label}</p>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", color: "#f0f0f0" }}>{item.value}</p>
+                </div>
+              ))}
             </div>
 
             <div style={{ marginBottom: "1.5rem" }}>
@@ -254,6 +288,18 @@ export default function ProjectDetail() {
               <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.75rem" }}>About</p>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", color: "rgba(240,240,240,0.8)", lineHeight: 1.7 }}>{project.description}</p>
             </div>
+
+            {briefItems.length > 0 && (
+              <div style={{ marginTop: "1.75rem", padding: "1.25rem", border: "1px solid rgba(34,197,94,0.25)", background: "rgba(34,197,94,0.04)" }}>
+                <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "#22c55e", textTransform: "uppercase", marginBottom: "1rem" }}>Ad Brief</p>
+                {briefItems.map(item => (
+                  <div key={item.label} style={{ marginBottom: "0.85rem" }}>
+                    <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.25rem" }}>{item.label}</p>
+                    <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.9rem", color: "#f0f0f0", lineHeight: 1.55 }}>{item.value}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
@@ -277,7 +323,7 @@ export default function ProjectDetail() {
                 color: "rgba(240,240,240,0.5)",
                 margin: 0,
               }}>
-                More in {project.category}
+                More {project.section === "commercial" ? "Commercials" : project.section === "fan" ? "Fan Work" : "Films"}
               </h2>
 
               {totalPages > 1 && (
@@ -326,7 +372,7 @@ export default function ProjectDetail() {
               )}
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }}>
+            <div className="grid-3" style={{ gap: "1rem" }}>
               {paged.map(p => (
                 <Link key={p.slug} href={`/work/${p.slug}`}>
                   <div>

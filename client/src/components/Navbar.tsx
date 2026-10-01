@@ -21,6 +21,7 @@ export default function Navbar() {
 
   return (
     <header
+      className="nav-bar"
       style={{
         position: "fixed",
         top: 0,
@@ -77,7 +78,7 @@ export default function Navbar() {
       </Link>
 
       {/* Nav links */}
-      <nav style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>
+      <nav className="nav-links" style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>
         {navLinks.map(({ href, label }) => {
           const isActive = href === "/" ? location === "/" : location.startsWith(href);
           return (

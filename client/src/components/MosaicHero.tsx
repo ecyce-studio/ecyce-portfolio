@@ -237,7 +237,7 @@ export default function MosaicHero() {
             marginBottom: "0.8rem",
           }}
         >
-          Video Editor — Korea
+          AI Video Ad Creator — Korea
         </p>
         <h1
           style={{
@@ -277,13 +277,26 @@ export default function MosaicHero() {
           }}
         >
           {language === "en"
-            ? "I’m Ecyce — an AI creator crafting memorable videos through rhythmic editing and clear storytelling."
-            : "저는 Ecyce입니다. — 박자감 있는 편집과 명확한 서사로 사람들의 기억에 남는 영상을 만듭니다."}
+            ? "I’m Ecyce — an AI video ad creator making scroll-stopping short-form ads with rhythmic editing and clear storytelling."
+            : "저는 Ecyce입니다. — 박자감 있는 편집과 명확한 서사로, 스크롤을 멈추게 하는 AI 광고 영상을 만듭니다."}
+        </p>
+        <p
+          style={{
+            marginTop: "1.1rem",
+            fontFamily: "'Space Mono', monospace",
+            fontSize: "clamp(0.6rem, 1vw, 0.7rem)",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: "rgba(240,240,240,0.45)",
+          }}
+        >
+          Commercials · Short-form Ads · Music Videos
         </p>
       </div>
 
       {/* Scroll indicator */}
       <div
+        className="hide-mobile"
         style={{
           position: "absolute",
           bottom: "2.5rem",
