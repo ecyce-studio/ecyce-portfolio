@@ -278,7 +278,7 @@ export default function MosaicHero() {
         >
           {language === "en"
             ? "I’m Ecyce — an AI video ad creator making scroll-stopping short-form ads with rhythmic editing and clear storytelling."
-            : "저는 Ecyce입니다. — 박자감 있는 편집과 명확한 서사로, 스크롤을 멈추게 하는 AI 광고 영상을 만듭니다."}
+            : "저는 Ecyce(이끼끼)입니다. — 박자감 있는 편집과 명확한 서사로, 스크롤을 멈추게 하는 AI 광고 영상을 만듭니다."}
         </p>
         <p
           style={{

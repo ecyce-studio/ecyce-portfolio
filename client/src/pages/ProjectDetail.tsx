@@ -7,6 +7,8 @@ import { WorkTypeBadge } from "@/components/ProjectCard";
 import { formatDuration, getLocalizedProjectBySlug, getLocalizedProjects } from "@/lib/projects";
 import { ArrowLeft, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import { getProjectPageMeta } from "@/lib/seo";
 
 export default function ProjectDetail() {
   const params = useParams<{ slug: string }>();
@@ -15,6 +17,7 @@ export default function ProjectDetail() {
   const localizedProjects = getLocalizedProjects(language);
   const [page, setPage] = useState(0);
   useEffect(() => setPage(0), [params.slug]);
+  usePageMeta(project && getProjectPageMeta(project), `/work/${params.slug}`);
 
   if (!project) {
     return (

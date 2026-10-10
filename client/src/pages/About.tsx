@@ -2,6 +2,8 @@
 // Style: Dark Craft — asymmetric layout, green accent details, geometric band accents
 import Navbar from "@/components/Navbar";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import { getStaticPageMeta } from "@/lib/seo";
 import { CONTACT_EMAIL, hideContact } from "@/lib/siteMode";
 
 const skills = [
@@ -25,6 +27,7 @@ function GeoBand() {
 
 export default function About() {
   const { language } = useLanguage();
+  usePageMeta(getStaticPageMeta("about", language), "/about");
 
   return (
     <div style={{ background: "#0a0a0a", minHeight: "100vh" }}>
@@ -96,7 +99,7 @@ export default function About() {
             }}>
               {language === "en"
                 ? "I’m Ecyce, an AI Video Ad Creator — a former game developer who builds short-form ads around rhythm, story and a clear production pipeline."
-                : "저는 Ecyce - 박자감과 이야기, 체계적인 제작 프로세스로 광고 영상을 만드는 게임 개발자 출신 AI Video Ad Creator입니다."}
+                : "저는 Ecyce(이끼끼) - 박자감과 이야기, 체계적인 제작 프로세스로 광고 영상을 만드는 게임 개발자 출신 AI Video Ad Creator입니다."}
             </p>
             <p style={{
               fontFamily: "'DM Sans', sans-serif",

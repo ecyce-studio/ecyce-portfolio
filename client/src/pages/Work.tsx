@@ -6,10 +6,13 @@ import Navbar from "@/components/Navbar";
 import ProjectCard, { UpcomingCard } from "@/components/ProjectCard";
 import { getLocalizedSections, showUpcomingSlots, upcomingSlots } from "@/lib/projects";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import { getStaticPageMeta } from "@/lib/seo";
 
 export default function Work() {
   const [visible, setVisible] = useState(false);
   const { language } = useLanguage();
+  usePageMeta(getStaticPageMeta("work", language), "/work");
   const sections = getLocalizedSections(language);
   useEffect(() => { setVisible(true); }, []);
 

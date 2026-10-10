@@ -7,12 +7,15 @@ import { getLocalizedProjects, type WorkSection } from "@/lib/projects";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import { getStaticPageMeta } from "@/lib/seo";
 
 // 광고 → 필름 순으로 노출, 팬 작업은 홈에서 제외
 const homeSectionOrder: WorkSection[] = ["commercial", "film"];
 
 export default function Home() {
   const { language } = useLanguage();
+  usePageMeta(getStaticPageMeta("home", language), "/");
   const localizedProjects = getLocalizedProjects(language);
   const displayed = homeSectionOrder
     .flatMap(section => localizedProjects.filter(p => p.section === section))
@@ -118,7 +121,7 @@ export default function Home() {
             }}>
               {language === "en"
                 ? "I’m Ecyce — a former game developer turned AI video ad creator. I run every project through a structured production pipeline, from planning and character sheets to AI generation and final edit, so brands get consistent, on-brief ads with a playful, trend-aware edge."
-                : "저는 Ecyce입니다. — 게임 개발자 출신의 AI 광고 영상 크리에이터입니다. 기획부터 캐릭터 시트, AI 생성, 최종 편집까지 체계적인 제작 프로세스로 진행해, 브리프에 맞는 일관된 광고 영상을 유쾌하고 트렌디한 감각으로 완성합니다."}
+                : "저는 Ecyce(이끼끼)입니다. — 게임 개발자 출신의 AI 광고 영상 크리에이터입니다. 기획부터 캐릭터 시트, AI 생성, 최종 편집까지 체계적인 제작 프로세스로 진행해, 브리프에 맞는 일관된 광고 영상을 유쾌하고 트렌디한 감각으로 완성합니다."}
             </p>
             <Link href="/about">
               <span style={{
