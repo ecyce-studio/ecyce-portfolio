@@ -12,13 +12,26 @@ const metaStyle = {
   textTransform: "uppercase" as const,
 };
 
+// 실제 의뢰 작업만 꽉 찬 초록 배지, 나머지는 테두리형으로 한 단계 낮춤
+// 썸네일 위에서도 읽히도록 테두리형은 어두운 반투명 바탕을 깔아둠
+function badgeColors(workType: Project["workType"]) {
+  if (workType === "client") {
+    return { color: "#0a0a0a", background: "#22c55e", border: "1px solid #22c55e" };
+  }
+  const accent = workType === "fan" ? "rgba(240,240,240,0.6)" : "#22c55e";
+  return {
+    color: accent,
+    background: "rgba(10,10,10,0.75)",
+    border: `1px solid ${workType === "fan" ? "rgba(240,240,240,0.35)" : "rgba(34,197,94,0.5)"}`,
+  };
+}
+
 export function WorkTypeBadge({ project }: { project: Project }) {
   return (
     <span style={{
       ...metaStyle,
+      ...badgeColors(project.workType),
       fontSize: "0.55rem",
-      color: "#0a0a0a",
-      background: project.workType === "fan" ? "rgba(240,240,240,0.7)" : "#22c55e",
       padding: "0.25rem 0.5rem",
       fontWeight: 700,
     }}>
