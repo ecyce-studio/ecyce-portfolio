@@ -272,10 +272,12 @@ export default function ProjectDetail() {
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", color: "#f0f0f0" }}>{project.role}</p>
             </div>
 
-            <div style={{ marginBottom: "1.5rem" }}>
-              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.4rem" }}>Tools</p>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", color: "#f0f0f0" }}>{project.tools.join(", ")}</p>
-            </div>
+            {project.tools.length > 0 && (
+              <div style={{ marginBottom: "1.5rem" }}>
+                <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.12em", color: "rgba(240,240,240,0.4)", textTransform: "uppercase", marginBottom: "0.4rem" }}>Tools</p>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", color: "#f0f0f0" }}>{project.tools.join(", ")}</p>
+              </div>
+            )}
 
             {project.aiTools && project.aiTools.length > 0 && (
               <div style={{ marginBottom: "1.5rem" }}>

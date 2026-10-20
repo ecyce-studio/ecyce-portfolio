@@ -11,7 +11,7 @@ export interface ContentBlock {
 export type WorkSection = "commercial" | "film" | "fan";
 
 // 작업 성격 — 카드/상세에 배지로 표시
-export type WorkType = "spec" | "contest" | "team" | "fan";
+export type WorkType = "client" | "spec" | "contest" | "team" | "fan";
 
 export interface AdBrief {
   hook: string;
@@ -65,6 +65,31 @@ const GUIRANG_PROCESS_EN: ContentBlock[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    slug: "gs_xi_armuse_xi",
+    title: "예술이 만드는 일상의 새로운 기준 — 아르뮤제자이",
+    client: "GS건설 (자이) — Agency Project",
+    category: "Commercial",
+    section: "commercial",
+    workType: "client",
+    year: "2026",
+    format: "16:9",
+    duration: 35,
+    platforms: ["YouTube (자이TV official channel)"],
+    thumbnail: "https://i.ytimg.com/vi/B8CQpFCJs0A/hqdefault.jpg",
+    youtubeId: "B8CQpFCJs0A",
+    description: "명화 속 주인공들이 그려낸 아르뮤제자이의 하루. 예술이 일상이 되는 주거 공간이라는 단지의 콘셉트를 AI 영상으로 표현한 브랜드 광고입니다.",
+    brief: {
+      hook: "명화 속 인물이 액자를 벗어나 일상 속으로 들어오는 장면",
+      audience: "문화·예술 감성을 중시하는 프리미엄 아파트 수요층",
+      goal: "'예술이 있는 프리미엄 주거' 브랜드 이미지 각인",
+    },
+    role: "AI Video Generation, Finishing",
+    tools: [],
+    aiTools: ["Higgsfield", "Seedance", "NanoBanana", "GPT"],
+    tags: ["Commercial", "Brand Film"],
+  },
+
   {
     slug: "woongjin_saengcha_contest",
     title: "첫 만남은 너무 어려워, 그런데 생차가 있다면?",
@@ -284,6 +309,7 @@ const sectionMeta: { key: WorkSection; name: string; note?: Record<Language, str
 ];
 
 export const workTypeLabels: Record<WorkType, string> = {
+  client: "Client Work",
   spec: "Spec Ad",
   contest: "Contest Entry",
   team: "Team Project",
@@ -309,11 +335,24 @@ export interface ProjectTranslation {
   category?: string;
   role?: string;
   tags?: string[];
+  platforms?: string[];
   brief?: AdBrief;
   content?: ContentBlock[];
 }
 
 const englishProjectTranslations: Record<string, ProjectTranslation> = {
+  gs_xi_armuse_xi: {
+    title: "GS E&C Xi — Armuse XI: Everyday Life, Redefined by Art",
+    client: "GS E&C (Xi) — Agency Project",
+    description:
+      "A day at Armuse XI, as painted by the figures of famous artworks. A brand film expressing the complex's concept — a home where art becomes part of everyday life — through AI video.",
+    brief: {
+      hook: "Figures from famous paintings step out of the frame and into daily life.",
+      audience: "Prospective homebuyers who value culture and premium living.",
+      goal: "Position Armuse XI as premium, art-infused living.",
+    },
+    platforms: ["YouTube (Xi TV official channel)"],
+  },
   woongjin_saengcha_contest: {
     title: "Woongjin Saengcha — The Awkward First Meeting",
     client: "Spec Ad (Contest Entry) — 2nd Saengcha-LOG AI Short Film Contest by Woongjin Foods",
