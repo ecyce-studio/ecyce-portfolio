@@ -1,0 +1,49 @@
+# Ecyce (이끼끼) — AI Video Creator
+
+> Ecyce (이끼끼) is an AI video creator based in Seoul, South Korea, who makes AI video ads, short-form ads, brand films and music videos. A former game developer, Ecyce handles the whole pipeline — storyboard, character sheets, AI image and video generation, editing and finishing — and has produced brand films for GS E&C's Xi apartment brand.
+
+Ecyce(이끼끼)는 서울에서 활동하는 AI 영상 제작자로, AI 광고 영상, 숏폼 광고, 브랜드 필름, 뮤직비디오를 만듭니다. 게임 개발자 출신으로 스토리보드, 캐릭터 시트, AI 이미지·영상 생성, 편집과 마무리까지 전 과정을 직접 진행하며, GS건설 자이(Xi)의 브랜드 필름을 제작했습니다.
+
+## Services
+
+- AI video ads and short-form ads (9:16 for Reels, YouTube Shorts and TikTok)
+- AI brand films and commercials (16:9)
+- AI music videos
+- Storyboards, character sheets and consistent AI characters
+
+## Production process
+
+Concept and planning → storyboard → character sheets and key images (Seedream on Higgsfield, NanoBanana, GPT Image) → AI video generation (Seedance on Higgsfield, Kling) → editing and finishing (Premiere Pro, After Effects, Photoshop).
+
+## Tools
+
+- AI Platform: Higgsfield
+- AI Video: Seedance, Kling, Google Flow
+- AI Image: Seedream, NanoBanana, GPT Image, MidJourney
+- Editing: Adobe Premiere Pro, After Effects, CapCut
+- Image: Adobe Photoshop, Procreate, Clip Studio
+- PM: Notion, Figma, Jira
+
+## Contact
+
+- Portfolio: https://ecyce-studio.github.io/ecyce-portfolio/
+- Email: ecyce.studio@gmail.com
+- YouTube: https://www.youtube.com/@ecyce.studio
+- Instagram: https://www.instagram.com/ecyce.studio/
+- Based in Seoul, South Korea; works remotely with clients worldwide.
+
+## Work
+
+- [GS E&C Xi — Armuse XI: When Night Falls (Brand Film)](https://ecyce-studio.github.io/ecyce-portfolio/work/gs_xi_armuse_xi_night/): GS E&C (Xi) — Agency Project. Commercial, 16:9, 1:10. Role: Storyboard, AI Video Generation, Editing & Finishing. A 70-second brand film I produced end to end from a client concept — storyboard, AI generation, editing and finishing. When night falls, the figures from famous paintings step off the canvas to stroll through the living room, work out and walk the gardens of Armuse XI: a place where every everyday scene becomes a work of art.
+- [GS E&C Xi — Armuse XI: Everyday Life, Redefined by Art](https://ecyce-studio.github.io/ecyce-portfolio/work/gs_xi_armuse_xi/): GS E&C (Xi) — Agency Project. Commercial, 16:9, 35s. Role: AI Video Generation, Finishing. A day at Armuse XI, as painted by the figures of famous artworks. A brand film expressing the complex's concept — a home where art becomes part of everyday life — through AI video.
+- [Woongjin Saengcha — The Awkward First Meeting](https://ecyce-studio.github.io/ecyce-portfolio/work/woongjin_saengcha_contest/): Spec Ad (Contest Entry) — 2nd Saengcha-LOG AI Short Film Contest by Woongjin Foods. Commercial, 9:16, 29s. Role: AI Creator. A beverage spot about how an awkward first meeting turns into a fond memory when Saengcha is part of it.
+- [Olidia — In Search of Glowing Skin](https://ecyce-studio.github.io/ecyce-portfolio/work/olidia_glowing_skin/): Contest Entry — Olidia AI Shortform Contest. Commercial, 9:16, 43s. Role: AI Creator. An office worker worried about her dull skin notices a coworker's sudden glow-up — and sets out to find the secret. Created for the Olidia AI Shortform Contest.
+- [Guirang Workshop — Brand Promo #1](https://ecyce-studio.github.io/ecyce-portfolio/work/guirang_workshop_promo_1/): Team Project — Brand Promo for a Craft Workshop. Commercial, 9:16, 22s. Role: PM, Planning, AI Creator. Episode 1 of a playful, character-driven promo series made in an AI video team project to raise awareness for a teammate's craft workshop.
+- [Guirang Workshop — Brand Promo #2](https://ecyce-studio.github.io/ecyce-portfolio/work/guirang_workshop_promo_2/): Team Project — Brand Promo for a Craft Workshop. Commercial, 9:16, 20s. Role: PM, Planning, AI Creator. Episode 2 of a playful, character-driven promo series made in an AI video team project to raise awareness for a teammate's craft workshop.
+- [Beyond Sound](https://ecyce-studio.github.io/ecyce-portfolio/work/beyond_sound/): Contest Entry — U+ × YouTube Youth AI Shorts Festival. Art Film, 9:16, 35s. Role: AI Creator. An AI visual-art film about how a voice — just one sound among many — becomes something singular once the speaker's identity is added. Created for the U+ × YouTube Youth AI Shorts Festival.
+
+## Optional
+
+- [About and FAQ](https://ecyce-studio.github.io/ecyce-portfolio/about/)
+- [Billlie 'WORK' — Fan Music Video](https://ecyce-studio.github.io/ecyce-portfolio/work/billlie_work_fmv/): Personal — Fan Work (non-commercial). Fan Music Video, 16:9, 1:00. Role: AI Creator, Motion Graphics. A fan-made music video built on the idea that the moment Billlie's 'WORK' starts, the world turns into a runway. Cut to the beat with motion-graphic accents throughout.
+- [54321 — The Amazing Digital Circus (Fan Music Video)](https://ecyce-studio.github.io/ecyce-portfolio/work/54321_amazing_digital_circus_fmv/): Personal — Fan Work (non-commercial). Fan Music Video, 16:9, 3:10. Role: Editor, Rotoscoping. A fan music video for The Amazing Digital Circus, staged around the characters and cut to the rhythm of a male-female duet.
