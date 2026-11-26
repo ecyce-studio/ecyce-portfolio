@@ -117,8 +117,8 @@ export const projects: Project[] = [
       goal: "'예술이 있는 프리미엄 주거' 브랜드 이미지 각인",
     },
     role: "AI Video Generation, Finishing",
-    tools: [],
-    aiTools: ["Higgsfield", "Seedance", "NanoBanana", "GPT"],
+    tools: ["Premiere Pro", "After Effects", "Photoshop"],
+    aiTools: ["Higgsfield (Seedance, Seedream)", "NanoBanana", "GPT Image"],
     tags: ["Commercial", "Brand Film"],
   },
 
