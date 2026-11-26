@@ -16,31 +16,31 @@ const staticPageMeta: Record<StaticPage, Record<Language, PageMeta>> = {
   home: {
     en: {
       title: `${BRAND} | AI Video Ad Creator`,
-      description: "Ecyce is an AI video ad creator based in Korea, making scroll-stopping short-form ads (9:16 Reels, Shorts, TikTok) and commercials with AI image and video generation.",
+      description: "Ecyce (이끼끼) is an AI video creator in Seoul, Korea, making AI video ads, short-form ads (Reels, Shorts, TikTok), brand films and music videos — including brand films for GS E&C's Xi.",
     },
     ko: {
       title: `${BRAND} | AI Video Ad Creator`,
-      description: "이끼끼(Ecyce)의 AI 광고 영상 포트폴리오. 기획부터 AI 이미지·영상 생성, 편집까지 숏폼 광고와 커머셜을 제작합니다.",
+      description: "AI 영상 제작자 이끼끼(Ecyce)의 포트폴리오. 스토리보드부터 AI 이미지·영상 생성, 편집까지 AI 광고 영상, 숏폼 광고, 브랜드 필름, 뮤직비디오를 제작합니다. GS건설 자이 브랜드 필름 제작.",
     },
   },
   work: {
     en: {
       title: `Work | ${BRAND} — AI Video Ad Creator`,
-      description: "AI video ads, short-form commercials and art films by Ecyce — spec ads, contest entries and team projects with format, length and ad brief for each.",
+      description: "AI video work by Ecyce (이끼끼) — client brand films for GS E&C Xi, AI ads, short-form commercials and art films, with format, length, tools and ad brief for each.",
     },
     ko: {
       title: `Work | ${BRAND} — AI Video Ad Creator`,
-      description: "이끼끼(Ecyce)의 작업물 — AI 광고 영상, 숏폼 커머셜, 아트 필름. 프로젝트별 포맷·길이·제작 과정을 확인할 수 있습니다.",
+      description: "AI 영상 제작자 이끼끼(Ecyce)의 작업물 — GS건설 자이 브랜드 필름, AI 광고 영상, 숏폼 커머셜, 아트 필름. 프로젝트별 포맷·길이·툴·제작 과정을 확인할 수 있습니다.",
     },
   },
   about: {
     en: {
       title: `About | ${BRAND} — AI Video Ad Creator`,
-      description: "About Ecyce — a former game developer turned AI video ad creator, with a structured production pipeline and tools like Seedance, Kling, Seedream and Premiere Pro.",
+      description: "About Ecyce (이끼끼) — a former game developer turned AI video creator in Seoul. Services, production process, tools (Higgsfield, Seedance, Seedream, NanoBanana, Premiere Pro) and how to hire.",
     },
     ko: {
       title: `About | ${BRAND} — AI Video Ad Creator`,
-      description: "이끼끼(Ecyce) 소개 — 게임 개발자 출신 AI 광고 영상 크리에이터. 체계적인 제작 프로세스와 사용 툴(Seedance, Kling, Seedream, Premiere Pro 등).",
+      description: "AI 영상 제작자 이끼끼(Ecyce) 소개 — 게임 개발자 출신. 제작 가능한 영상, 제작 과정, 사용 툴(Higgsfield, Seedance, Seedream, NanoBanana, Premiere Pro), 의뢰 방법.",
     },
   },
 };

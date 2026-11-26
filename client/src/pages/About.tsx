@@ -5,14 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { getStaticPageMeta } from "@/lib/seo";
 import { CONTACT_EMAIL, hideContact } from "@/lib/siteMode";
-
-const skills = [
-  { category: "AI Video", items: ["Seedance", "Kling", "Google Flow", "Higgsfield"] },
-  { category: "AI Image", items: ["Seedream", "NanoBanana", "MidJourney", "GPT Image"] },
-  { category: "Editing", items: ["Adobe Premiere Pro", "After Effects", "CapCut"] },
-  { category: "Image", items: ["Adobe Photoshop", "Procreate", "Clip Studio"] },
-  { category: "PM", items: ["Notion", "Figma", "Jira"] },
-];
+import { getFaq, skills } from "@/lib/profile";
 
 // Small geometric accent SVG for section dividers
 function GeoBand() {
@@ -222,6 +215,46 @@ export default function About() {
             </div>
           </div>
         </div>
+
+        {/* FAQ — AI 검색이 인용하기 쉬운 질문·답변 형태의 사실 정보 */}
+        <section style={{ marginTop: "6rem" }}>
+          <GeoBand />
+          <h2 style={{
+            fontFamily: "'Space Mono', monospace",
+            fontSize: "0.6rem",
+            fontWeight: 400,
+            letterSpacing: "0.18em",
+            color: "#22c55e",
+            textTransform: "uppercase",
+            marginBottom: "2rem",
+          }}>
+            FAQ
+          </h2>
+          <div className="grid-2" style={{ gap: "2.5rem 4rem" }}>
+            {getFaq(language, !hideContact).map(item => (
+              <div key={item.question}>
+                <h3 style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: "1.05rem",
+                  fontWeight: 700,
+                  color: "#f0f0f0",
+                  lineHeight: 1.4,
+                  marginBottom: "0.6rem",
+                }}>
+                  {item.question}
+                </h3>
+                <p style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontSize: "0.95rem",
+                  color: "rgba(240,240,240,0.7)",
+                  lineHeight: 1.75,
+                }}>
+                  {item.answer}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );

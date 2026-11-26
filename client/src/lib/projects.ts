@@ -34,6 +34,7 @@ export interface Project {
   platforms: string[];
   videoUrl?: string;
   youtubeId?: string;
+  uploadDate?: string; // YYYY-MM-DD, 영상 구조화 데이터(VideoObject)에 사용
   description: string;
   brief?: AdBrief;
   content?: ContentBlock[];
@@ -66,6 +67,36 @@ const GUIRANG_PROCESS_EN: ContentBlock[] = [
 
 export const projects: Project[] = [
   {
+    slug: "gs_xi_armuse_xi_night",
+    title: "밤이 되면, 작품 속 주인공이 — 아르뮤제자이 브랜드 필름",
+    client: "GS건설 (자이) — Agency Project",
+    category: "Commercial",
+    section: "commercial",
+    workType: "client",
+    year: "2026",
+    format: "16:9",
+    duration: 70,
+    platforms: ["YouTube (자이TV official channel)"],
+    thumbnail: "https://i.ytimg.com/vi/X6MEnU3WtkA/hqdefault.jpg",
+    youtubeId: "X6MEnU3WtkA",
+    uploadDate: "2026-10-29",
+    description: "콘셉트만 전달받아 스토리보드부터 완성까지 직접 제작한 70초 브랜드 필름입니다. 밤이 되면 명화 속 주인공들이 캔버스를 벗어나 아르뮤제자이의 거실을 거닐고, 운동을 하고, 정원을 산책합니다. '일상의 모든 장면이 작품이 되는 곳'이라는 단지 콘셉트를 담았습니다.",
+    brief: {
+      hook: "밤이 되자 명화 속 주인공들이 캔버스 밖으로 걸어 나오는 순간",
+      audience: "문화·예술 감성을 중시하는 프리미엄 아파트 수요층",
+      goal: "2026년 11월 오픈을 앞두고 '일상이 작품이 되는 곳'이라는 기대감 형성",
+    },
+    content: [
+      { type: "heading", text: "PROCESS" },
+      { type: "text", text: "콘셉트 전달 (클라이언트) > 스토리보드 > AI 이미지 제작 > AI 영상 제작 > 편집·마무리 — 스토리보드부터 전 과정 직접 진행" },
+    ],
+    role: "Storyboard, AI Video Generation, Editing & Finishing",
+    tools: ["Premiere Pro", "After Effects", "Photoshop"],
+    aiTools: ["Higgsfield (Seedance, Seedream)", "NanoBanana", "GPT Image"],
+    tags: ["Commercial", "Brand Film"],
+  },
+
+  {
     slug: "gs_xi_armuse_xi",
     title: "예술이 만드는 일상의 새로운 기준 — 아르뮤제자이",
     client: "GS건설 (자이) — Agency Project",
@@ -78,6 +109,7 @@ export const projects: Project[] = [
     platforms: ["YouTube (자이TV official channel)"],
     thumbnail: "https://i.ytimg.com/vi/B8CQpFCJs0A/hqdefault.jpg",
     youtubeId: "B8CQpFCJs0A",
+    uploadDate: "2026-10-13",
     description: "명화 속 주인공들이 그려낸 아르뮤제자이의 하루. 예술이 일상이 되는 주거 공간이라는 단지의 콘셉트를 AI 영상으로 표현한 브랜드 광고입니다.",
     brief: {
       hook: "명화 속 인물이 액자를 벗어나 일상 속으로 들어오는 장면",
@@ -104,6 +136,7 @@ export const projects: Project[] = [
     platforms: SHORTS_PLATFORMS,
     thumbnail: "https://i.ytimg.com/vi/38XLXKgK6Dc/hqdefault.jpg",
     youtubeId: "38XLXKgK6Dc",
+    uploadDate: "2026-08-06",
     description: "어쩌면 흑역사가 되었을 떨떠름한 첫 만남이 '생차'와 함께 하기에 추억이 된다는 이야기를 담은 음료 광고 영상입니다.",
     brief: {
       hook: "누구나 겪어본, 얼어붙은 첫 만남의 어색함으로 시작",
@@ -144,6 +177,7 @@ export const projects: Project[] = [
     platforms: SHORTS_PLATFORMS,
     thumbnail: "https://i.ytimg.com/vi/FeydfhqrjNk/hqdefault.jpg",
     youtubeId: "FeydfhqrjNk",
+    uploadDate: "2026-06-01",
     description: "피부 컨디션이 나빠져 고민이던 직장인 A씨. 어느 날 몰라보게 좋아진 동료 B의 피부를 보고 그 비법을 찾아 나서게 되는 이야기입니다. 올리디아 AI 29역 숏폼왕 공모전 출품작.",
     brief: {
       hook: "\"너 피부 왜 이렇게 좋아졌어?\" — 동료의 변화에서 시작하는 호기심",
@@ -173,6 +207,7 @@ export const projects: Project[] = [
     platforms: SHORTS_PLATFORMS,
     thumbnail: "https://i.ytimg.com/vi/IXd5X1n1cCQ/hqdefault.jpg",
     youtubeId: "IXd5X1n1cCQ",
+    uploadDate: "2026-06-18",
     description: "AI 영상 제작 팀 프로젝트로, 팀원이 운영하는 공방의 브랜드를 알리기 위해 유쾌하고 개성 있는 톤으로 제작한 홍보 영상 시리즈 1편입니다.",
     brief: {
       hook: "첫 장면부터 시선을 잡는 유쾌한 캐릭터 코미디",
@@ -199,6 +234,7 @@ export const projects: Project[] = [
     platforms: SHORTS_PLATFORMS,
     thumbnail: "https://i.ytimg.com/vi/fjfZX1OPVx4/hqdefault.jpg",
     youtubeId: "fjfZX1OPVx4",
+    uploadDate: "2026-06-29",
     description: "AI 영상 제작 팀 프로젝트로, 팀원이 운영하는 공방의 브랜드를 알리기 위해 유쾌하고 개성 있는 톤으로 제작한 홍보 영상 시리즈 2편입니다.",
     brief: {
       hook: "1편의 캐릭터와 톤을 이어가는 시리즈형 코미디",
@@ -225,6 +261,7 @@ export const projects: Project[] = [
     platforms: ["YouTube Shorts"],
     thumbnail: "https://i.ytimg.com/vi/OxO8BnWn4YM/hqdefault.jpg",
     youtubeId: "OxO8BnWn4YM",
+    uploadDate: "2026-07-30",
     description: "목소리 역시 수많은 소리(Sound) 중 하나이지만, 화자의 고유성이 더해질 때 비로소 단 하나뿐인 '목소리(Voice)'가 됨을 AI 비주얼 아트로 표현한 작품입니다. [U+ x YouTube] 유쓰 AI 쇼츠 페스티벌 출품작.",
     role: "AI Creator",
     tools: ["Premiere Pro", "After Effects"],
@@ -245,6 +282,7 @@ export const projects: Project[] = [
     platforms: ["YouTube"],
     thumbnail: "https://i.ytimg.com/vi/oS2ea0jQPYA/hqdefault.jpg",
     youtubeId: "oS2ea0jQPYA",
+    uploadDate: "2026-07-26",
     description: "빌리(Billlie)의 'Work'를 들으면 그 순간부터 패션쇼가 펼쳐진다는 콘셉트로 제작한 뮤직비디오입니다. 비트에 맞춰 영상을 편집하고 중간중간 모션 그래픽을 더했습니다.",
     role: "AI Creator, Motion Graphics",
     tools: ["Premiere Pro", "After Effects"],
@@ -265,6 +303,7 @@ export const projects: Project[] = [
     platforms: ["YouTube"],
     thumbnail: "https://i.ytimg.com/vi/OnPhj1qvxjw/hqdefault.jpg",
     youtubeId: "OnPhj1qvxjw",
+    uploadDate: "2026-07-02",
     description: "애니메이션 '더 어메이징 디지털 서커스'의 팬 뮤직비디오로, 남녀 듀엣 곡에 맞춰 등장인물에 포커스를 맞춘 연출을 시도했습니다. 노래의 비트에 맞춰 영상을 편집했습니다.",
     role: "Editor, Rotoscoping",
     tools: ["Premiere Pro", "After Effects"],
@@ -341,6 +380,22 @@ export interface ProjectTranslation {
 }
 
 const englishProjectTranslations: Record<string, ProjectTranslation> = {
+  gs_xi_armuse_xi_night: {
+    title: "GS E&C Xi — Armuse XI: When Night Falls (Brand Film)",
+    client: "GS E&C (Xi) — Agency Project",
+    description:
+      "A 70-second brand film I produced end to end from a client concept — storyboard, AI generation, editing and finishing. When night falls, the figures from famous paintings step off the canvas to stroll through the living room, work out and walk the gardens of Armuse XI: a place where every everyday scene becomes a work of art.",
+    brief: {
+      hook: "At nightfall, figures from famous paintings walk out of their canvases.",
+      audience: "Prospective homebuyers who value culture and premium living.",
+      goal: "Build anticipation for the November 2026 opening around 'a home where everyday life becomes art'.",
+    },
+    content: [
+      { type: "heading", text: "PROCESS" },
+      { type: "text", text: "Concept (from client) > Storyboard > AI image creation > AI video generation > Editing & finishing — everything from the storyboard on was done by me." },
+    ],
+    platforms: ["YouTube (Xi TV official channel)"],
+  },
   gs_xi_armuse_xi: {
     title: "GS E&C Xi — Armuse XI: Everyday Life, Redefined by Art",
     client: "GS E&C (Xi) — Agency Project",
